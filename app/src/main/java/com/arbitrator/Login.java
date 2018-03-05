@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -18,7 +20,12 @@ import com.google.android.gms.tasks.Task;
 
 public class Login extends AppCompatActivity {
 
-    Button b, c;
+    Button login, c;
+    TextView em,pwd;
+    String email="anushkkrastogi@gmail.com";
+    String password="password";
+
+
     GoogleSignInClient mGoogleSignInClient;
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
@@ -29,15 +36,24 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        b=(Button)findViewById(R.id.btn_login);
-        b.setOnClickListener(new View.OnClickListener() {
+        login=(Button)findViewById(R.id.btn_login);
+        em=(TextView)findViewById(R.id.input_email);
+        pwd=(TextView)findViewById(R.id.input_password);
+
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(i);
-                finish();
+                if (em.getText().toString().equals(email) && pwd.getText().toString().equals(password)) {
+                    gotomain();
+                } else {
+                    Toast.makeText(getApplicationContext(),"Invalid Email and Password Combination!",Toast.LENGTH_LONG).show();
+                }
             }
         });
+
+
+
+
 /*
         b = (Button) findViewById(R.id.aage);
         c = (Button) findViewById(R.id.aag);
@@ -64,6 +80,12 @@ public class Login extends AppCompatActivity {
                 finish();
             }
         });*/
+    }
+
+    private void gotomain() {
+        Intent i=new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(i);
+        finish();
     }
 
     @Override

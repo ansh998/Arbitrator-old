@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true">
 
     <LinearLayout
@@ -13,8 +14,8 @@
         android:paddingRight="24dp">
 
         <ImageView
-            android:src="@drawable/sp_text"
-            android:layout_width="wrap_content"
+            android:src="@drawable/ic_mic_black_24dp"
+            android:layout_width="72dp"
             android:layout_height="72dp"
             android:layout_marginBottom="24dp"
             android:layout_gravity="center_horizontal" />
@@ -31,6 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
+                android:text="anushkkrastogi@gmail.com"
                 android:hint="Email" />
         </android.support.design.widget.TextInputLayout>
 
@@ -38,6 +40,7 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
 
@@ -46,7 +49,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
+                android:text="password"
                 android:hint="Password" />
+
         </android.support.design.widget.TextInputLayout>
 
         <android.support.v7.widget.AppCompatButton

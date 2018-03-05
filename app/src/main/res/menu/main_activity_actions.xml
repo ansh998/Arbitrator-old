@@ -9,5 +9,9 @@
         android:id="@+id/menu_btn_cnglg"
         android:title="ChangeLog" />
 
+    <item
+        android:id="@+id/menu_btn_lgout"
+        android:title="Logout" />
+
 
 </menu>
