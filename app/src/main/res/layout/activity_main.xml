@@ -9,26 +9,34 @@
     tools:context=".MainActivity">
 
     <ImageView
+        android:id="@+id/menubtn"
         android:layout_width="40dp"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:layout_alignParentRight="true"
         android:layout_marginRight="15dp"
         android:layout_marginTop="10dp"
-        android:id="@+id/menubtn"
-        android:src="@drawable/btn_menu" />
+        android:src="@drawable/ic_more_vert_white_48dp" />
 
-    <EditText
-        android:id="@+id/txtinp"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:id="@+id/txtinp"
+
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
-        android:text="Default"
-        android:textColor="#ffffff"
-        android:textSize="24dp"
-        android:textStyle="normal" />
+        android:layout_marginTop="50dp">
+
+        <EditText
+            android:id="@+id/txtinp1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hello"
+            android:textColor="#ffffff"
+            android:textSize="24dp"
+            android:textStyle="normal"/>
+    </android.support.design.widget.TextInputLayout>
+
 
     <Button
         android:id="@+id/okbtn"
@@ -61,7 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Tap on Mic"
+            android:text="@string/tap_on_mic"
             android:textColor="#ffffff"
             android:textSize="15dp"
             android:textStyle="normal" />

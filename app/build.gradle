@@ -6,8 +6,8 @@ android {
         applicationId "com.arbitrator"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 13
-        versionName "alpha-1.13"
+        versionCode 14
+        versionName "alpha-1.14"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

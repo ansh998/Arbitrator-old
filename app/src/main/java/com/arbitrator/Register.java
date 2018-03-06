@@ -2,26 +2,24 @@ package com.arbitrator;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
-public class Login extends AppCompatActivity {
+public class Register extends AppCompatActivity {
 
     Button login, c;
-    TextView em,pwd,reg;
+    TextView em,pwd;
     String email="anushkkrastogi@gmail.com";
     String password="password";
 
@@ -39,7 +37,6 @@ public class Login extends AppCompatActivity {
         login=(Button)findViewById(R.id.btn_login);
         em=(TextView)findViewById(R.id.input_email);
         pwd=(TextView)findViewById(R.id.input_password);
-        reg=(TextView)findViewById(R.id.link_signup);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,15 +46,6 @@ public class Login extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(),"Invalid Email and Password Combination!",Toast.LENGTH_LONG).show();
                 }
-            }
-        });
-
-        reg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(getApplicationContext(),Register.class);
-                startActivity(i);
-                finish();
             }
         });
 

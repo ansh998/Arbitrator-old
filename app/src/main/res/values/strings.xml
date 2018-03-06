@@ -7,8 +7,8 @@
     <string name="tap_on_mic">Tap on mic</string>
     <string name="title_activity_changelog">Changelog</string>
 
-    <string name="changelog">
-        \[version- \'alpha-1.13\'\] \n -added login screen\n \n
-        \[version- \'alpha-1.12\'\] \n -added menu\n -removed login screen due to errors</string>
+    <string name="changelog">\[version- \'alpha-1.14\'\] \n -changed menu button icon
+        \n \n \[version- \'alpha-1.13\'\] \n -added login screen
+        \n \n \[version- \'alpha-1.12\'\] \n -added menu\n -removed login screen due to errors</string>
 
 </resources>
