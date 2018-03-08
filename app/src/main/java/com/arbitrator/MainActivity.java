@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
 
-        tinp = findViewById(R.id.txtinp);
+        tinp = findViewById(R.id.txtinp1);
         bspk = findViewById(R.id.btnSpeak);
         ok = findViewById(R.id.okbtn);
         asd = findViewById(R.id.menubtn);
