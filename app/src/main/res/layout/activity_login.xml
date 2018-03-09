@@ -68,9 +68,14 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:text="No account yet? Create one"
+            android:text="@string/reg"
             android:gravity="center"
-            android:textSize="16dip" />
+            android:textSize="16dp" />
+
+        <com.google.android.gms.common.SignInButton
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/gsio"/>
 
     </LinearLayout>
 </ScrollView>

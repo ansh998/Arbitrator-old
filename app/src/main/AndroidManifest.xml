@@ -40,9 +40,6 @@
         <activity android:name=".changelog"
             android:label="Changelog"/>
 
-        <activity android:name=".Register"
-            android:theme="@style/AppTheme.Dark"/>
-
     </application>
 
 </manifest>

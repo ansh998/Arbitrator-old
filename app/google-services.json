@@ -15,16 +15,16 @@
       },
       "oauth_client": [
         {
-          "client_id": "745541524398-mn73cdhnc7mqdrbq4ovqo2fdoa5g272f.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "745541524398-bfhcr719u820u8e9ic54fvkpb4v0amtq.apps.googleusercontent.com",
+          "client_id": "745541524398-cut40nu20qttrh5s9lu0p0ul5g36i2fp.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.arbitrator",
-            "certificate_hash": "88dbba387647506c707ed000ce5b73c6d929c04b"
+            "certificate_hash": "dc0cc2bc0562097812d947559dbdc28576c2749f"
           }
+        },
+        {
+          "client_id": "745541524398-mn73cdhnc7mqdrbq4ovqo2fdoa5g272f.apps.googleusercontent.com",
+          "client_type": 3
         },
         {
           "client_id": "745541524398-aan1nmkgf12udo6dl01iejp8cmoo8jgb.apps.googleusercontent.com",
