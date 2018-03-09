@@ -40,6 +40,9 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
@@ -119,6 +122,13 @@ public class MainActivity extends Activity {
                         startActivity(i);
                         break;
 
+                    case R.id.menu_btn_lgout:
+                        FirebaseAuth.getInstance().signOut();
+                        Intent li= new Intent(getApplicationContext(),Login.class);
+                        startActivity(li);
+                        finish();
+                        break;
+
                     default:
                         break;
                 }
@@ -127,7 +137,6 @@ public class MainActivity extends Activity {
         });
         pop.show();
     }
-
 
     @Override
     protected void onResume() {
@@ -375,6 +384,5 @@ public class MainActivity extends Activity {
             }
         }*/
     }
-
 
 }
