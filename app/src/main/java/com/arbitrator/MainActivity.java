@@ -60,13 +60,18 @@ public class MainActivity extends Activity {
     String parts[];
     Button ok;
     ImageView asd;
-    ArrayList<String> appNameList = new ArrayList<>();
-    ArrayList<String> appPackageList = new ArrayList<>();
+
+
+    private Set set = null;
+    private Appopen ao = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        set = new Set(this);
+        ao = new Appopen(this);
 
 
         tinp = findViewById(R.id.txtinp1);
@@ -170,22 +175,22 @@ public class MainActivity extends Activity {
     }
 
     public void openCase() {
-        startApp();
+        ao.startApp();
         if (!parts[1].equalsIgnoreCase("arbitrator")) {
             if (parts[1].equalsIgnoreCase("wifi") || parts[1].equalsIgnoreCase("wi-fi")) {
-                wifi("open");
+                set.wifi("open");
             } else if (parts[1].equalsIgnoreCase("bluetooth")) {
-                bt("open");
+                set.bt("open");
             } else if (parts[1].equalsIgnoreCase("torch") || parts[1].equalsIgnoreCase("flashlight")) {
-                flash("open");
+                set.flash("open");
             } else if (parts.length == 2) {
                 t = parts[1];
-                startApp(appNameList.indexOf(t.toLowerCase()));
+                ao.startApp(ao.appNameList.indexOf(t.toLowerCase()));
             } else {
-                int hits[] = new int[appNameList.size()];
+                int hits[] = new int[ao.appNameList.size()];
                 int max = 0, in = 0;
-                for (int i = 0; i < appNameList.size(); i++) {
-                    String ww = appNameList.get(i);
+                for (int i = 0; i < ao.appNameList.size(); i++) {
+                    String ww = ao.appNameList.get(i);
                     int tt = 0;
                     for (int j = 1; j < parts.length; j++) {
                         if (ww.contains(parts[j].toLowerCase())) {
@@ -199,7 +204,7 @@ public class MainActivity extends Activity {
                         in = i;
                     }
                 }
-                startApp(in);
+                ao.startApp(in);
             }
         }
     }
@@ -209,14 +214,14 @@ public class MainActivity extends Activity {
             switch (parts[1].toLowerCase()) {
                 case "wi-fi":
                 case "wifi":
-                    wifi("close");
+                    set.wifi("close");
                     break;
                 case "bluetooth":
-                    bt("close");
+                    set.bt("close");
                     break;
                 case "torch":
                 case "flashlight":
-                    flash("close");
+                    set.flash("close");
                     break;
             }
         } else if (parts[0].equalsIgnoreCase("turn")) {
@@ -225,14 +230,14 @@ public class MainActivity extends Activity {
                     switch (parts[2].toLowerCase()) {
                         case "wi-fi":
                         case "wifi":
-                            wifi("open");
+                            set.wifi("open");
                             break;
                         case "bluetooth":
-                            bt("open");
+                            set.bt("open");
                             break;
                         case "torch":
                         case "flashlight":
-                            flash("close");
+                            set.flash("close");
                             break;
                     }
                     break;
@@ -240,14 +245,14 @@ public class MainActivity extends Activity {
                     switch (parts[2].toLowerCase()) {
                         case "wi-fi":
                         case "wifi":
-                            wifi("close");
+                            set.wifi("close");
                             break;
                         case "bluetooth":
-                            bt("close");
+                            set.bt("close");
                             break;
                         case "torch":
                         case "flashlight":
-                            flash("close");
+                            set.flash("close");
                             break;
                     }
                     break;
@@ -282,85 +287,6 @@ public class MainActivity extends Activity {
             startActivityForResult(i, req);
         } catch (ActivityNotFoundException e) {
             Toast.makeText(getApplicationContext(), getString(R.string.speech_not_supported), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void startApp() {
-        PackageManager pm = getPackageManager();
-        Intent i = new Intent(Intent.ACTION_MAIN, null);
-        i.addCategory(Intent.CATEGORY_LAUNCHER);
-        List<ResolveInfo> packages = pm.queryIntentActivities(i, 0);
-
-        for (ResolveInfo ri : packages) {
-            try {
-                String pn = ri.activityInfo.packageName;
-                String an = (String) pm.getApplicationLabel(pm.getApplicationInfo(pn, PackageManager.GET_META_DATA));
-
-                boolean s = false;
-
-                for (int j = 0; j < appNameList.size(); j++) {
-                    if (pn.equals(appPackageList.get(j)))
-                        s = true;
-                }
-
-                if (!s) {
-                    appNameList.add(an.toLowerCase());
-                    appPackageList.add(pn);
-                }
-                //Log.i("Check","package = <"+pn+"> name = <"+an+">");
-            } catch (Exception e) {
-            }
-        }
-    }
-
-    public void startApp(int f) {
-        if (f != -1) {
-            activityStarter(getApplicationContext(), appPackageList.get(f));
-        } else {
-            Toast.makeText(getApplicationContext(), "App not Installed !", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void activityStarter(Context c, String pn) {
-        Intent i = c.getPackageManager().getLaunchIntentForPackage(pn);
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        c.startActivity(i);
-    }
-
-    public void wifi(String a) {
-        WifiManager w = (WifiManager) getApplicationContext().getSystemService(getApplicationContext().WIFI_SERVICE);
-        if (a.equalsIgnoreCase("close")) {
-            w.setWifiEnabled(false);
-        } else if (a.equalsIgnoreCase("open")) {
-            w.setWifiEnabled(true);
-        }
-    }
-
-    public void bt(String a) {
-        BluetoothAdapter bt = BluetoothAdapter.getDefaultAdapter();
-        if (a.equalsIgnoreCase("close")) {
-            bt.disable();
-        } else if (a.equalsIgnoreCase("open")) {
-            bt.enable();
-        }
-
-    }
-
-    public void flash(String a) {
-        if (getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
-            android.hardware.Camera cam = android.hardware.Camera.open();
-            android.hardware.Camera.Parameters p = cam.getParameters();
-            p.setFlashMode(android.hardware.Camera.Parameters.FLASH_MODE_TORCH);
-
-            switch (a.toLowerCase()) {
-                case "open":
-                    cam.setParameters(p);
-                    cam.startPreview();
-                    break;
-                case "close":
-                    cam.stopPreview();
-                    cam.release();
-            }
         }
     }
 
