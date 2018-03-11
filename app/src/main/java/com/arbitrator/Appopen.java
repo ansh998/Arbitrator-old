@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;

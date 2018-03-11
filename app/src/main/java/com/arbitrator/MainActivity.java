@@ -53,17 +53,17 @@ public class MainActivity extends Activity {
 
     TextView tinp;
     ImageButton bspk;
-    View longkey;
     final int req = 100;
     String t = "";
     String y = "";
-    String parts[];
+    public static String[] parts;
     Button ok;
     ImageView asd;
 
 
     private Set set = null;
     private Appopen ao = null;
+    private Systemser ss = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +72,7 @@ public class MainActivity extends Activity {
 
         set = new Set(this);
         ao = new Appopen(this);
+        ss = new Systemser(this);
 
 
         tinp = findViewById(R.id.txtinp1);
@@ -82,7 +83,7 @@ public class MainActivity extends Activity {
         asd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                abc();
+                menupop();
             }
         });
 
@@ -111,7 +112,7 @@ public class MainActivity extends Activity {
 
     }
 
-    private void abc() {
+    private void menupop() {
         PopupMenu pop = new PopupMenu(this, asd);
         pop.getMenuInflater().inflate(R.menu.main_activity_actions, pop.getMenu());
         pop.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -166,7 +167,7 @@ public class MainActivity extends Activity {
                 settingcase();
                 break;
             case "call":
-                caller();
+                ss.caller();
                 break;
             case "set":
 
@@ -188,7 +189,7 @@ public class MainActivity extends Activity {
                 ao.startApp(ao.appNameList.indexOf(t.toLowerCase()));
             } else {
                 int hits[] = new int[ao.appNameList.size()];
-                int max = 0, in = 0;
+                int max = 0, in = -1;
                 for (int i = 0; i < ao.appNameList.size(); i++) {
                     String ww = ao.appNameList.get(i);
                     int tt = 0;
@@ -288,28 +289,6 @@ public class MainActivity extends Activity {
         } catch (ActivityNotFoundException e) {
             Toast.makeText(getApplicationContext(), getString(R.string.speech_not_supported), Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private void caller() {
-        if (parts.length == 2) {
-            //if (Pattern.matches("[0-9]",parts[1])) {
-            Intent ci = new Intent(Intent.ACTION_CALL);
-            ci.setData(Uri.parse("tel:" + parts[1]));
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE);
-                return;
-            }
-            startActivity(ci);
-            //}
-        }
-        /*else {
-            String NAME="";
-            ContentResolver cr = getContentResolver();
-            Cursor cursor= cr.query(ContactsContract.Contacts.CONTENT_URI,null,"DISPLAY_NAME = "+NAME+"'",null,null);
-            if (cursor.moveToFirst()){
-                //String
-            }
-        }*/
     }
 
 }
