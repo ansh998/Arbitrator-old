@@ -124,7 +124,7 @@ public class MainActivity extends Activity {
 
                     case R.id.menu_btn_lgout:
                         FirebaseAuth.getInstance().signOut();
-                        Intent li= new Intent(getApplicationContext(),Login.class);
+                        Intent li = new Intent(getApplicationContext(), Login.class);
                         startActivity(li);
                         finish();
                         break;
@@ -163,6 +163,8 @@ public class MainActivity extends Activity {
             case "call":
                 caller();
                 break;
+            case "set":
+
         }
 
     }
@@ -283,7 +285,6 @@ public class MainActivity extends Activity {
         }
     }
 
-
     public void startApp() {
         PackageManager pm = getPackageManager();
         Intent i = new Intent(Intent.ACTION_MAIN, null);
@@ -326,7 +327,7 @@ public class MainActivity extends Activity {
         c.startActivity(i);
     }
 
-    private void wifi(String a) {
+    public void wifi(String a) {
         WifiManager w = (WifiManager) getApplicationContext().getSystemService(getApplicationContext().WIFI_SERVICE);
         if (a.equalsIgnoreCase("close")) {
             w.setWifiEnabled(false);
@@ -335,7 +336,7 @@ public class MainActivity extends Activity {
         }
     }
 
-    private void bt(String a) {
+    public void bt(String a) {
         BluetoothAdapter bt = BluetoothAdapter.getDefaultAdapter();
         if (a.equalsIgnoreCase("close")) {
             bt.disable();
@@ -345,7 +346,7 @@ public class MainActivity extends Activity {
 
     }
 
-    private void flash(String a) {
+    public void flash(String a) {
         if (getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
             android.hardware.Camera cam = android.hardware.Camera.open();
             android.hardware.Camera.Parameters p = cam.getParameters();

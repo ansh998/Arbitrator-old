@@ -1,7 +1,7 @@
- package com.arbitrator;
+package com.arbitrator;
 
-        import android.support.v7.app.AppCompatActivity;
-        import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 
 public class changelog extends AppCompatActivity {
 

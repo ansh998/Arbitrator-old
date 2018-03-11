@@ -21,13 +21,13 @@
 
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
 
         <activity
             android:name=".Splash"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,14 +37,15 @@
 
         <activity
             android:name=".Login"
-            android:theme="@style/AppTheme.Dark"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Dark" />
 
         <activity
             android:name=".changelog"
             android:label="Changelog"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
     </application>
+
 
 </manifest>

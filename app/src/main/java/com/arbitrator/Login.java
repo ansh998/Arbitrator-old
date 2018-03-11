@@ -34,12 +34,12 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class Login extends AppCompatActivity {
 
     Button login, c;
-    TextView em,pwd,reg;
-    String email="anushkkrastogi@gmail.com";
-    String password="password";
+    TextView em, pwd, reg;
+    String email = "anushkkrastogi@gmail.com";
+    String password = "password";
     SignInButton sib;
 
-    private  FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
 
     GoogleSignInClient mGoogleSignInClient;
     private static final String TAG = "SignInActivity";
@@ -51,11 +51,11 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        login=(Button)findViewById(R.id.btn_login);
-        em=(TextView)findViewById(R.id.input_email);
-        pwd=(TextView)findViewById(R.id.input_password);
-        reg=(TextView)findViewById(R.id.link_signup);
-        sib=(SignInButton)findViewById(R.id.gsio);
+        login = (Button) findViewById(R.id.btn_login);
+        em = (TextView) findViewById(R.id.input_email);
+        pwd = (TextView) findViewById(R.id.input_password);
+        reg = (TextView) findViewById(R.id.link_signup);
+        sib = (SignInButton) findViewById(R.id.gsio);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +63,7 @@ public class Login extends AppCompatActivity {
                 if (em.getText().toString().equals(email) && pwd.getText().toString().equals(password)) {
                     gotomain();
                 } else {
-                    Toast.makeText(getApplicationContext(),"Invalid Email and Password Combination!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Invalid Email and Password Combination!", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -71,7 +71,7 @@ public class Login extends AppCompatActivity {
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bi=new Intent(Intent.ACTION_VIEW);
+                Intent bi = new Intent(Intent.ACTION_VIEW);
                 bi.setData(Uri.parse("http://www.google.com"));
                 startActivity(bi);
             }
@@ -83,9 +83,9 @@ public class Login extends AppCompatActivity {
                 .requestEmail()
                 .build();
 
-        mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        mAuth=FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         sib.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,11 +97,11 @@ public class Login extends AppCompatActivity {
 
     private void Gsin() {
         Intent sii = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(sii,RC_SIGN_IN);
+        startActivityForResult(sii, RC_SIGN_IN);
     }
 
     private void gotomain() {
-        Intent i=new Intent(getApplicationContext(),MainActivity.class);
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(i);
         finish();
     }
