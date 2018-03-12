@@ -101,7 +101,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void gotomain() {
-        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        Intent i = new Intent(getApplicationContext(), Register.class);
         startActivity(i);
         finish();
     }
@@ -118,12 +118,12 @@ public class Login extends AppCompatActivity {
         if (a != null) {
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(i);
-            singIn();
+            signIn();
             finish();
         }
     }
 
-    private void singIn() {
+    private void signIn() {
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if (acct != null) {
             String personName = acct.getDisplayName();

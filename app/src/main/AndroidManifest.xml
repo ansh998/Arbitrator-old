@@ -18,12 +18,10 @@
         android:roundIcon="@drawable/ico_mic"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
-
         <activity
             android:name=".Splash"
             android:screenOrientation="portrait"
@@ -34,18 +32,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Login"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Dark" />
-
         <activity
             android:name=".changelog"
             android:label="Changelog"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".Register"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Dark" />
     </application>
-
 
 </manifest>
