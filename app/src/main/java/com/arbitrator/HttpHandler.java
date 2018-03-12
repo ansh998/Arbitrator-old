@@ -16,9 +16,6 @@ public class HttpHandler {
 
     private static final String TAG = HttpHandler.class.getSimpleName();
 
-    public HttpHandler() {
-    }
-
     public String makeServiceCallpost(String reqUrl) {
         String response = null;
         try {
