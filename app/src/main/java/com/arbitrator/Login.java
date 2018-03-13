@@ -71,8 +71,7 @@ public class Login extends AppCompatActivity {
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bi = new Intent(Intent.ACTION_VIEW);
-                bi.setData(Uri.parse("http://www.google.com"));
+                Intent bi = new Intent(getApplicationContext(),Register.class);
                 startActivity(bi);
             }
         });
@@ -101,7 +100,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void gotomain() {
-        Intent i = new Intent(getApplicationContext(), Register.class);
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(i);
         finish();
     }

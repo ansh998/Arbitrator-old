@@ -2,8 +2,11 @@ package com.arbitrator;
 
 import android.util.Log;
 
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -16,7 +19,7 @@ public class HttpHandler {
 
     private static final String TAG = HttpHandler.class.getSimpleName();
 
-    public String makeServiceCallpost(String reqUrl) {
+    public String makeServiceCallpost(String reqUrl, JSONObject urlparams) {
         String response = null;
         try {
             URL url = new URL(reqUrl);
@@ -26,6 +29,11 @@ public class HttpHandler {
             conn.addRequestProperty("Accept-Language","en-US,en;q=0.5");
             conn.addRequestProperty("Accept","application/json");
             conn.addRequestProperty("Content-Type","application/json");
+
+            DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
+            wr.writeBytes(urlparams.toString());
+            wr.flush();
+            wr.close();
 
             // read the response
             InputStream in = new BufferedInputStream(conn.getInputStream());
