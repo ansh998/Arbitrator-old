@@ -57,6 +57,9 @@ public class Login extends AppCompatActivity {
         reg = (TextView) findViewById(R.id.link_signup);
         sib = (SignInButton) findViewById(R.id.gsio);
 
+        sib.setColorScheme(SignInButton.COLOR_LIGHT);
+
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

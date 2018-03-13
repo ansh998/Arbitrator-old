@@ -18,7 +18,7 @@
             android:layout_height="72dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="24dp"
-            android:src="@drawable/ic_mic_black_24dp" />
+            android:src="@drawable/ic_mic_white_24dp" />
 
         <!-- Email Label -->
         <android.support.design.widget.TextInputLayout
@@ -75,7 +75,7 @@
         <com.google.android.gms.common.SignInButton
             android:id="@+id/gsio"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 </ScrollView>
