@@ -31,6 +31,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import org.json.JSONObject;
+
+import java.util.concurrent.ExecutionException;
+
 public class Login extends AppCompatActivity {
 
     Button login, c;
@@ -38,6 +42,7 @@ public class Login extends AppCompatActivity {
     String email = "anushkkrastogi@gmail.com";
     String password = "password";
     SignInButton sib;
+    String arr[][];
 
     private FirebaseAuth mAuth;
 
@@ -63,11 +68,7 @@ public class Login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (em.getText().toString().equals(email) && pwd.getText().toString().equals(password)) {
-                    gotomain();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Invalid Email and Password Combination!", Toast.LENGTH_LONG).show();
-                }
+                check();
             }
         });
 
@@ -95,6 +96,26 @@ public class Login extends AppCompatActivity {
                 Gsin();
             }
         });
+    }
+
+    private void check() {
+
+        JSONObject jo=null;
+        arr=new String[][]{{"email",em.getText().toString()},{"password",pwd.getText().toString()}};
+        Helper pa=new Helper("http://aiproject7579.ddns.net/api/login",2,arr);
+        JsonHandler jh = new JsonHandler();
+        try {
+            jo = jh.execute(pa).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        if (jo==null) {
+            Toast.makeText(getApplicationContext(),"nay",Toast.LENGTH_SHORT).show();
+        }else {
+            gotomain();
+        }
     }
 
     private void Gsin() {

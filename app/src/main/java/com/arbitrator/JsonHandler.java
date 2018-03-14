@@ -7,7 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class JsonHandler extends AsyncTask<Void, Void, Void> {
+public class JsonHandler extends AsyncTask<Helper, Void, JSONObject> {
 
     public String url;
     public int c;
@@ -16,9 +16,14 @@ public class JsonHandler extends AsyncTask<Void, Void, Void> {
     private String TAG = this.getClass().getSimpleName();
 
     @Override
-    protected Void doInBackground(Void... voids) {
+    protected JSONObject doInBackground(Helper... helpers) {
+
+        url = helpers[0].url;
+        c = helpers[0].c;
+        arr = helpers[0].arr;
 
         HttpHandler hh = new HttpHandler();
+        JSONObject jsonObj = null;
 
         if (c == 1) {
             String jsonStr = hh.makeServiceCallget(url);
@@ -26,7 +31,7 @@ public class JsonHandler extends AsyncTask<Void, Void, Void> {
             if (jsonStr != null) {
                 try {
                     JSONArray jsonArr = new JSONArray(jsonStr);
-                    JSONObject jsonObj = (JSONObject) (jsonArr.get(0));
+                    jsonObj = (JSONObject) (jsonArr.get(0));
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
                 }
@@ -45,7 +50,7 @@ public class JsonHandler extends AsyncTask<Void, Void, Void> {
                 if (jsonStr != null) {
                     try {
                         JSONArray jsonArr = new JSONArray(jsonStr);
-                        JSONObject jsonObj = (JSONObject) (jsonArr.get(0));
+                        jsonObj = (JSONObject) (jsonArr.get(0));
                     } catch (final JSONException e) {
                         Log.e(TAG, "Json parsing error: " + e.getMessage());
                     }
@@ -57,12 +62,13 @@ public class JsonHandler extends AsyncTask<Void, Void, Void> {
             }
         }
 
-        return null;
+        return jsonObj;
     }
 
-    @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
 
+    @Override
+    protected void onPostExecute(JSONObject aVoid) {
+        super.onPostExecute(aVoid);
+        //return aVoid;
     }
 }

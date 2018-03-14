@@ -18,6 +18,7 @@ import android.provider.ContactsContract;
 import android.service.autofill.RegexValidator;
 import android.speech.RecognizerIntent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
@@ -60,6 +61,8 @@ public class MainActivity extends Activity {
     Button ok;
     ImageView asd;
 
+    public TextToSpeech tts;
+
 
     private Set set = null;
     private Appopen ao = null;
@@ -73,6 +76,8 @@ public class MainActivity extends Activity {
         set = new Set(this);
         ao = new Appopen(this);
         ss = new Systemser(this);
+
+        ao.startApp();
 
 
         tinp = findViewById(R.id.txtinp1);
@@ -94,19 +99,31 @@ public class MainActivity extends Activity {
             }
         });
 
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                y = tinp.getText().toString();
-                parser();
-                y = "";
-            }
-        });
 
         tinp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tinp.setText("");
+            }
+        });
+
+        tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR) {
+                    tts.setLanguage(Locale.getDefault());
+                }
+            }
+        });
+
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //ao.startApp();
+                y = tinp.getText().toString();
+                tts.speak(y, TextToSpeech.QUEUE_FLUSH, null);
+                parser();
+                y = "";
             }
         });
 
@@ -176,8 +193,9 @@ public class MainActivity extends Activity {
     }
 
     public void openCase() {
-        ao.startApp();
-        if (!parts[1].equalsIgnoreCase("arbitrator")) {
+        //ao.startApp();
+
+        if (parts.length > 1 && !parts[1].equalsIgnoreCase("arbitrator")) {
             if (parts[1].equalsIgnoreCase("wifi") || parts[1].equalsIgnoreCase("wi-fi")) {
                 set.wifi("open");
             } else if (parts[1].equalsIgnoreCase("bluetooth")) {
@@ -286,9 +304,18 @@ public class MainActivity extends Activity {
 
         try {
             startActivityForResult(i, req);
+            //ao.startApp();
         } catch (ActivityNotFoundException e) {
             Toast.makeText(getApplicationContext(), getString(R.string.speech_not_supported), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void onPause() {
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
+        super.onPause();
     }
 
 }
