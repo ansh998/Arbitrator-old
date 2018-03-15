@@ -43,6 +43,7 @@ public class Login extends AppCompatActivity {
     String password = "password";
     SignInButton sib;
     String arr[][];
+    String u;
 
     private FirebaseAuth mAuth;
 
@@ -61,6 +62,8 @@ public class Login extends AppCompatActivity {
         pwd = (TextView) findViewById(R.id.input_password);
         reg = (TextView) findViewById(R.id.link_signup);
         sib = (SignInButton) findViewById(R.id.gsio);
+
+        u=getResources().getString(R.string.url2);
 
         sib.setColorScheme(SignInButton.COLOR_LIGHT);
 
@@ -100,21 +103,25 @@ public class Login extends AppCompatActivity {
 
     private void check() {
 
-        JSONObject jo=null;
-        arr=new String[][]{{"email",em.getText().toString()},{"password",pwd.getText().toString()}};
-        Helper pa=new Helper("http://aiproject7579.ddns.net/api/login",2,arr);
-        JsonHandler jh = new JsonHandler();
         try {
-            jo = jh.execute(pa).get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        if (jo==null) {
-            Toast.makeText(getApplicationContext(),"nay",Toast.LENGTH_SHORT).show();
-        }else {
-            gotomain();
+            JSONObject jo = null;
+            arr = new String[][]{{"email", em.getText().toString()}, {"password", pwd.getText().toString()}};
+            Helper pa = new Helper(u + "login", 2, arr);
+            JsonHandler jh = new JsonHandler();
+            try {
+                jo = jh.execute(pa).get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+            if (jo == null) {
+                Toast.makeText(getApplicationContext(), "nay", Toast.LENGTH_SHORT).show();
+            } else {
+                gotomain();
+            }
+        }catch (Exception e) {
+            Log.d("dga",e.getMessage());
         }
     }
 
@@ -139,6 +146,7 @@ public class Login extends AppCompatActivity {
 
     public void start(FirebaseUser a) {
         if (a != null) {
+            //sendmail(a);
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(i);
             signIn();
@@ -190,6 +198,18 @@ public class Login extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
+                        }
+                    }
+                });
+    }
+
+    public void sendmail(FirebaseUser a) {
+        a.sendEmailVerification()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d("sjdfh","email sent");
                         }
                     }
                 });

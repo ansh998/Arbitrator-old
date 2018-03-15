@@ -16,4 +16,7 @@
         \n \n \[version- \'alpha-1.13\'\] \n -added login screen
         \n \n \[version- \'alpha-1.12\'\] \n -added menu\n -removed login screen due to errors</string>
 
+    <string name="url1">http\:\/\/dk98\.ddns\.net\/api\/</string>
+    <string name="url2">http\:\/\/aiproject7579\.ddns\.net\/api\/</string>
+
 </resources>
