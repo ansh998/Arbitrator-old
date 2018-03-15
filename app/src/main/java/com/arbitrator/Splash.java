@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class Splash extends AppCompatActivity {
 
-    private Appopen ao=null;
+    private Appopen ao = null;
 
     String pms[] = {
             Manifest.permission.CALL_PHONE,
@@ -30,7 +30,7 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        ao=new Appopen(this);
+        ao = new Appopen(this);
 
         if (!haspms(this, pms)) {
             ActivityCompat.requestPermissions(this, pms, 131);

@@ -63,7 +63,7 @@ public class Login extends AppCompatActivity {
         reg = (TextView) findViewById(R.id.link_signup);
         sib = (SignInButton) findViewById(R.id.gsio);
 
-        u=getResources().getString(R.string.url2);
+        u = getResources().getString(R.string.url2);
 
         sib.setColorScheme(SignInButton.COLOR_LIGHT);
 
@@ -78,7 +78,7 @@ public class Login extends AppCompatActivity {
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bi = new Intent(getApplicationContext(),Register.class);
+                Intent bi = new Intent(getApplicationContext(), Register.class);
                 startActivity(bi);
             }
         });
@@ -120,8 +120,8 @@ public class Login extends AppCompatActivity {
             } else {
                 gotomain();
             }
-        }catch (Exception e) {
-            Log.d("dga",e.getMessage());
+        } catch (Exception e) {
+            Log.d("dga", e.getMessage());
         }
     }
 
@@ -209,7 +209,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Log.d("sjdfh","email sent");
+                            Log.d("sjdfh", "email sent");
                         }
                     }
                 });

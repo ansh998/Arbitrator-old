@@ -25,10 +25,10 @@ public class HttpHandler {
             URL url = new URL(reqUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
-            conn.addRequestProperty("User-Agent","Mozilla/5.0");
-            conn.addRequestProperty("Accept-Language","en-US,en;q=0.5");
-            conn.addRequestProperty("Accept","application/json");
-            conn.addRequestProperty("Content-Type","application/json");
+            conn.addRequestProperty("User-Agent", "Mozilla/5.0");
+            conn.addRequestProperty("Accept-Language", "en-US,en;q=0.5");
+            conn.addRequestProperty("Accept", "application/json");
+            conn.addRequestProperty("Content-Type", "application/json");
 
             DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
             wr.writeBytes(urlparams.toString());
@@ -56,8 +56,8 @@ public class HttpHandler {
             URL url = new URL(reqUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
-            conn.addRequestProperty("User-Agent","Mozilla/5.0");
-            conn.addRequestProperty("Accept-Language","en-US,en;q=0.5");
+            conn.addRequestProperty("User-Agent", "Mozilla/5.0");
+            conn.addRequestProperty("Accept-Language", "en-US,en;q=0.5");
 
             // read the response
             InputStream in = new BufferedInputStream(conn.getInputStream());

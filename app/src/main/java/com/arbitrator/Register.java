@@ -54,7 +54,7 @@ public class Register extends AppCompatActivity {
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(getApplicationContext(),Login.class);
+                Intent i = new Intent(getApplicationContext(), Login.class);
                 startActivity(i);
                 finish();
             }
@@ -66,7 +66,7 @@ public class Register extends AppCompatActivity {
 
         try {
             Date myDate = df.parse(date);
-            String my = myDate.getDate() + "-" + (myDate.getMonth() + 1) + "-" + (1900 + myDate.getYear());
+            String my = myDate.getDate() + "/" + (myDate.getMonth() + 1) + "/" + (1900 + myDate.getYear());
             Log.i("qwe", my);
         } catch (ParseException e) {
             dob.setError("Invalid Date");

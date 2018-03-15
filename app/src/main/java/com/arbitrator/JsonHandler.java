@@ -65,7 +65,6 @@ public class JsonHandler extends AsyncTask<Helper, Void, JSONObject> {
         return jsonObj;
     }
 
-
     @Override
     protected void onPostExecute(JSONObject aVoid) {
         super.onPostExecute(aVoid);

@@ -10,8 +10,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="24dp"
-        android:paddingRight="24dp"
-        android:paddingTop="56dp">
+        android:paddingTop="56dp"
+        android:paddingRight="24dp">
 
         <ImageView
             android:layout_width="72dp"
@@ -24,8 +24,8 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
 
             <EditText
                 android:id="@+id/input_email"
@@ -40,8 +40,8 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             app:passwordToggleEnabled="true">
 
             <EditText
@@ -58,8 +58,8 @@
             android:id="@+id/btn_login"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
             android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
             android:padding="12dp"
             android:text="Login" />
 
@@ -75,7 +75,7 @@
         <com.google.android.gms.common.SignInButton
             android:id="@+id/gsio"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 </ScrollView>
