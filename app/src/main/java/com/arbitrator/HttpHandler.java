@@ -17,7 +17,9 @@ import java.net.URL;
 
 public class HttpHandler {
 
+
     private static final String TAG = HttpHandler.class.getSimpleName();
+
 
     public String makeServiceCallpost(String reqUrl, JSONObject urlparams) {
         String response = null;
@@ -95,4 +97,5 @@ public class HttpHandler {
 
         return sb.toString();
     }
+
 }

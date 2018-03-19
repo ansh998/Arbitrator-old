@@ -52,6 +52,7 @@ import java.util.regex.Pattern;
 
 public class MainActivity extends Activity {
 
+
     TextView tinp;
     ImageButton bspk;
     final int req = 100;
@@ -61,12 +62,14 @@ public class MainActivity extends Activity {
     Button ok;
     ImageView asd;
 
+
     public TextToSpeech tts;
 
 
     private Set set = null;
     private Appopen ao = null;
     private Systemser ss = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,6 +190,7 @@ public class MainActivity extends Activity {
                 ss.caller();
                 break;
             case "set":
+                ss.alarm();
 
         }
 

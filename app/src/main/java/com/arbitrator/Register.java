@@ -20,9 +20,12 @@ public class Register extends AppCompatActivity {
     TextView dob;
     Button reg;
 
+
     String date;
 
+
     SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,4 +76,5 @@ public class Register extends AppCompatActivity {
             Log.e("hgfdakj", e.getMessage());
         }
     }
+
 }

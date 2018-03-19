@@ -9,11 +9,14 @@ import org.json.JSONObject;
 
 public class JsonHandler extends AsyncTask<Helper, Void, JSONObject> {
 
+
     public String url;
     public int c;
     public String arr[][];
 
+
     private String TAG = this.getClass().getSimpleName();
+
 
     @Override
     protected JSONObject doInBackground(Helper... helpers) {
@@ -70,4 +73,5 @@ public class JsonHandler extends AsyncTask<Helper, Void, JSONObject> {
         super.onPostExecute(aVoid);
         //return aVoid;
     }
+
 }

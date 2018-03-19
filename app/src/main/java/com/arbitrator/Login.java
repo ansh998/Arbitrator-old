@@ -37,6 +37,7 @@ import java.util.concurrent.ExecutionException;
 
 public class Login extends AppCompatActivity {
 
+
     Button login, c;
     TextView em, pwd, reg;
     String email = "anushkkrastogi@gmail.com";
@@ -45,7 +46,9 @@ public class Login extends AppCompatActivity {
     String arr[][];
     String u;
 
+
     private FirebaseAuth mAuth;
+
 
     GoogleSignInClient mGoogleSignInClient;
     private static final String TAG = "SignInActivity";
@@ -63,7 +66,7 @@ public class Login extends AppCompatActivity {
         reg = (TextView) findViewById(R.id.link_signup);
         sib = (SignInButton) findViewById(R.id.gsio);
 
-        u = getResources().getString(R.string.url2);
+        u = getResources().getString(R.string.url1);
 
         sib.setColorScheme(SignInButton.COLOR_LIGHT);
 
@@ -115,7 +118,7 @@ public class Login extends AppCompatActivity {
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
-            if (jo == null) {
+            if (jo.has("error")) {
                 Toast.makeText(getApplicationContext(), "nay", Toast.LENGTH_SHORT).show();
             } else {
                 gotomain();

@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 public class Splash extends AppCompatActivity {
 
-    private Appopen ao = null;
 
     String pms[] = {
             Manifest.permission.CALL_PHONE,
@@ -25,12 +24,13 @@ public class Splash extends AppCompatActivity {
             Manifest.permission.READ_CONTACTS
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        ao = new Appopen(this);
+        //ao = new Appopen(this);
 
         if (!haspms(this, pms)) {
             ActivityCompat.requestPermissions(this, pms, 131);
@@ -84,4 +84,5 @@ public class Splash extends AppCompatActivity {
                 Toast.makeText(this, "Wrong!!", Toast.LENGTH_SHORT).show();
         }
     }
+
 }

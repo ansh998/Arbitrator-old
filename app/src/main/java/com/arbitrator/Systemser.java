@@ -5,15 +5,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
+import android.text.format.Time;
 
 import static com.arbitrator.MainActivity.parts;
 
 public class Systemser {
 
+
     private final Context context;
+
 
     public Systemser(Context context) {
         this(context, PreferenceManager.getDefaultSharedPreferences(context));
@@ -54,6 +58,11 @@ public class Systemser {
         }
         context.startActivity(i);
 
+    }
+
+    public void alarm() {
+        MediaPlayer mp = MediaPlayer.create(context, R.raw.apple_ring);
+        mp.start();
     }
 
 }
