@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sync   "
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
@@ -32,27 +32,26 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/c"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:text="Device:"
-            android:textColor="#ffffff"
-            android:id="@+id/c"/>
+            android:textColor="#ffffff" />
 
         <Spinner
+            android:id="@+id/d"
             android:layout_width="50dp"
             android:layout_height="20dp"
-            android:id="@+id/d"
             android:layout_toRightOf="@+id/c"
-            android:background="@color/white"/>
+            android:background="@color/white" />
 
         <View
+            android:id="@+id/z"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#cccccc"
             android:layout_below="@+id/c"
-            android:paddingBottom="16dp"
-            android:id="@+id/z">
-        </View>
+            android:background="#cccccc"
+            android:paddingBottom="16dp"></View>
 
         <!--Name -->
 
@@ -65,70 +64,70 @@
             android:textColor="#ffffff" />
 
         <TextView
+            android:id="@+id/f"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:textColor="#ffffff"
-            android:id="@+id/f"
-            android:layout_toRightOf="@id/e"
             android:layout_below="@id/z"
-            android:text="test"/>
+            android:layout_toRightOf="@id/e"
+            android:text="test"
+            android:textColor="#ffffff" />
 
         <!-- type -->
 
         <TextView
+            android:id="@+id/g"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:id="@+id/g"
-            android:text="Device Type :"
             android:layout_below="@+id/e"
+            android:text="Device Type :"
             android:textColor="#ffffff" />
 
         <TextView
+            android:id="@+id/h"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:textColor="#ffffff"
-            android:layout_toRightOf="@id/g"
             android:layout_below="@id/f"
-            android:id="@+id/h"
-            android:text="test"/>
+            android:layout_toRightOf="@id/g"
+            android:text="test"
+            android:textColor="#ffffff" />
 
         <!-- id -->
 
         <TextView
+            android:id="@+id/i"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:id="@+id/i"
-            android:text="Device ID :"
             android:layout_below="@+id/g"
+            android:text="Device ID :"
             android:textColor="#ffffff" />
 
         <TextView
+            android:id="@+id/j"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:textColor="#ffffff"
-            android:layout_toRightOf="@id/i"
             android:layout_below="@id/h"
-            android:id="@+id/j"
-            android:text="test"/>
+            android:layout_toRightOf="@id/i"
+            android:text="test"
+            android:textColor="#ffffff" />
 
         <!-- Status -->
 
         <TextView
+            android:id="@+id/k"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:id="@+id/k"
-            android:text="Status :"
             android:layout_below="@+id/i"
+            android:text="Status :"
             android:textColor="#ffffff" />
 
         <TextView
+            android:id="@+id/l"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:textColor="#ffffff"
-            android:layout_toRightOf="@id/k"
             android:layout_below="@id/j"
-            android:id="@+id/l"
-            android:text="test"/>
+            android:layout_toRightOf="@id/k"
+            android:text="test"
+            android:textColor="#ffffff" />
 
     </RelativeLayout>
 

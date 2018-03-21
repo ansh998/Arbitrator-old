@@ -44,7 +44,7 @@ public class Login extends AppCompatActivity {
     String password = "password";
     SignInButton sib;
     String arr[][];
-    String u ;
+    String u;
 
 
     private FirebaseAuth mAuth;
@@ -168,10 +168,10 @@ public class Login extends AppCompatActivity {
                     startActivity(i);
                 } else {
 */
-                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(i);
-                    signIn();
-                    finish();
+            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(i);
+            signIn();
+            finish();
 /*
                 }
             } catch (Exception e) {

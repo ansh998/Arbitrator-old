@@ -64,13 +64,13 @@ public class Systemser {
     }
 
     public void alarm(Date d) {
-        int hr=d.getHours();
-        int min=d.getMinutes();
-        Intent i=new Intent(AlarmClock.ACTION_SET_ALARM);
-        i.putExtra(AlarmClock.EXTRA_SKIP_UI,true);
-        i.putExtra(AlarmClock.EXTRA_HOUR,hr);
-        i.putExtra(AlarmClock.EXTRA_MINUTES,min);
-        i.putExtra(AlarmClock.EXTRA_MESSAGE,"Uth JA Mohan Pyare \n Uth JA Lal Dulare");
+        int hr = d.getHours();
+        int min = d.getMinutes();
+        Intent i = new Intent(AlarmClock.ACTION_SET_ALARM);
+        i.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
+        i.putExtra(AlarmClock.EXTRA_HOUR, hr);
+        i.putExtra(AlarmClock.EXTRA_MINUTES, min);
+        i.putExtra(AlarmClock.EXTRA_MESSAGE, "Uth JA Mohan Pyare \n Uth JA Lal Dulare");
         context.startActivity(i);
     }
 

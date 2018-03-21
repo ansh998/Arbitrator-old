@@ -88,7 +88,7 @@ public class MainActivity extends Activity {
         ss = new Systemser(this);
         pp = new Parser(this);
 
-        pp.setter(set,ao,ss);
+        pp.setter(set, ao, ss);
 
         ao.startApp();
 

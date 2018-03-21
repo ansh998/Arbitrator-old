@@ -35,7 +35,6 @@ public class Parser {
     public void parse1(String y) {
 
 
-
         parts = y.split(" ");
 
 
