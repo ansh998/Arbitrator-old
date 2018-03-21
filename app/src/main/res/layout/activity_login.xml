@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
-                android:text="anushkkrastogi@gmail.com" />
+                android:text="saatvik@gmail.com" />
         </android.support.design.widget.TextInputLayout>
 
         <!-- Password Label -->
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Password"
                 android:inputType="textPassword"
-                android:text="password" />
+                android:text="pass" />
 
         </android.support.design.widget.TextInputLayout>
 

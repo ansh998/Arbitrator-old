@@ -21,7 +21,8 @@ public class Splash extends AppCompatActivity {
             Manifest.permission.BLUETOOTH,
             Manifest.permission.BLUETOOTH_ADMIN,
             Manifest.permission.CAMERA,
-            Manifest.permission.READ_CONTACTS
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.SET_ALARM
     };
 
 

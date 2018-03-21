@@ -44,7 +44,7 @@ public class Login extends AppCompatActivity {
     String password = "password";
     SignInButton sib;
     String arr[][];
-    String u;
+    String u ;
 
 
     private FirebaseAuth mAuth;
@@ -60,15 +60,16 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         login = (Button) findViewById(R.id.btn_login);
         em = (TextView) findViewById(R.id.input_email);
         pwd = (TextView) findViewById(R.id.input_password);
         reg = (TextView) findViewById(R.id.link_signup);
         sib = (SignInButton) findViewById(R.id.gsio);
 
-        u = getResources().getString(R.string.url1);
-
         sib.setColorScheme(SignInButton.COLOR_LIGHT);
+
+        u = getResources().getString(R.string.url2);
 
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +86,6 @@ public class Login extends AppCompatActivity {
                 startActivity(bi);
             }
         });
-
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -105,7 +105,6 @@ public class Login extends AppCompatActivity {
     }
 
     private void check() {
-
         try {
             JSONObject jo = null;
             arr = new String[][]{{"email", em.getText().toString()}, {"password", pwd.getText().toString()}};
@@ -124,7 +123,7 @@ public class Login extends AppCompatActivity {
                 gotomain();
             }
         } catch (Exception e) {
-            Log.d("dga", e.getMessage());
+            Log.d("nrml check", e.getMessage());
         }
     }
 
@@ -150,10 +149,35 @@ public class Login extends AppCompatActivity {
     public void start(FirebaseUser a) {
         if (a != null) {
             //sendmail(a);
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(i);
-            signIn();
-            finish();
+/*
+            try {
+                JSONObject jo = null;
+                Helper pa = new Helper(u + "emailcheck/"+a.getEmail(), 1, arr);
+                JsonHandler jh = new JsonHandler();
+                try {
+                    jo = jh.execute(pa).get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                if (jo.isNull("error")) {
+                    Toast.makeText(getApplicationContext(), "Unregistered Email Entered", Toast.LENGTH_SHORT).show();
+                    FirebaseAuth.getInstance().signOut();
+                    Intent i = new Intent(getApplicationContext(), Register.class);
+                    startActivity(i);
+                } else {
+*/
+                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(i);
+                    signIn();
+                    finish();
+/*
+                }
+            } catch (Exception e) {
+                Log.d("google", e.getMessage());
+            }
+*/
         }
     }
 

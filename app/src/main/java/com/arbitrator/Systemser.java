@@ -8,8 +8,11 @@ import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.provider.AlarmClock;
 import android.support.v4.app.ActivityCompat;
 import android.text.format.Time;
+
+import java.util.Date;
 
 import static com.arbitrator.MainActivity.parts;
 
@@ -60,9 +63,15 @@ public class Systemser {
 
     }
 
-    public void alarm() {
-        MediaPlayer mp = MediaPlayer.create(context, R.raw.apple_ring);
-        mp.start();
+    public void alarm(Date d) {
+        int hr=d.getHours();
+        int min=d.getMinutes();
+        Intent i=new Intent(AlarmClock.ACTION_SET_ALARM);
+        i.putExtra(AlarmClock.EXTRA_SKIP_UI,true);
+        i.putExtra(AlarmClock.EXTRA_HOUR,hr);
+        i.putExtra(AlarmClock.EXTRA_MINUTES,min);
+        i.putExtra(AlarmClock.EXTRA_MESSAGE,"Uth JA Mohan Pyare \n Uth JA Lal Dulare");
+        context.startActivity(i);
     }
 
 }

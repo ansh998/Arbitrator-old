@@ -13,15 +13,21 @@ import android.database.Cursor;
 import android.graphics.Camera;
 import android.inputmethodservice.Keyboard;
 import android.net.Uri;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.provider.ContactsContract;
 import android.service.autofill.RegexValidator;
 import android.speech.RecognizerIntent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.*;
 
 import android.view.KeyEvent;
@@ -155,6 +161,11 @@ public class MainActivity extends Activity {
                         finish();
                         break;
 
+                    case R.id.menu_btn_sync:
+                        Intent si= new Intent(getApplicationContext(),SyncSetting.class);
+                        startActivity(si);
+                        break;
+
                     default:
                         break;
                 }
@@ -176,7 +187,6 @@ public class MainActivity extends Activity {
 
         parts = y.split(" ");
 
-        y = "";
 
         switch (parts[0].toLowerCase()) {
             case "open":
@@ -190,10 +200,39 @@ public class MainActivity extends Activity {
                 ss.caller();
                 break;
             case "set":
-                ss.alarm();
-
+                if (y.contains("alarm")) {
+                    int t = -1;
+                    for (int i = 0; i < parts.length; i++) {
+                        if (parts[i].contains(":")) {
+                            t = i;
+                        }
+                    }
+                    if (t != -1) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("h:mm");
+                        Date d = null;
+                        try {
+                            d = sdf.parse(parts[t]);
+                            if (parts.length > t + 1) {
+                                String da = "" + d.getHours();
+                                int n = Integer.parseInt(da);
+                                if (parts[t + 1].equalsIgnoreCase("pm") && n < 13) {
+                                    n += 12;
+                                    if (n > 24)
+                                        n -= 24;
+                                } else if (parts[t + 1].equalsIgnoreCase("am") && n > 11) {
+                                    n -= 12;
+                                }
+                                da = n + ":" + d.getMinutes();
+                                d = sdf.parse(da);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        ss.alarm(d);
+                    }
+                }
         }
-
+        y = "";
     }
 
     public void openCase() {
@@ -209,6 +248,8 @@ public class MainActivity extends Activity {
             } else if (parts.length == 2) {
                 t = parts[1];
                 ao.startApp(ao.appNameList.indexOf(t.toLowerCase()));
+            } else if (parts[1].equalsIgnoreCase("airplane")) {
+                //s
             } else {
                 int hits[] = new int[ao.appNameList.size()];
                 int max = 0, in = -1;
