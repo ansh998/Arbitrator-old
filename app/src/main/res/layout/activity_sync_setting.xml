@@ -1,9 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SyncSetting">
+    android:background="@color/primary_dark"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Switch
+            android:id="@+id/b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sync   "
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#cccccc"
+        android:paddingBottom="16dp"></View>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="Device:"
+            android:textColor="#ffffff"
+            android:id="@+id/c"/>
+
+        <Spinner
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:id="@+id/d"
+            android:layout_toRightOf="@+id/c"
+            android:background="@color/white"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#cccccc"
+            android:layout_below="@+id/c"
+            android:paddingBottom="16dp"
+            android:id="@+id/z">
+        </View>
+
+        <!--Name -->
+
+        <TextView
+            android:id="@+id/e"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@+id/z"
+            android:text="Device Name :"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:textColor="#ffffff"
+            android:id="@+id/f"
+            android:layout_toRightOf="@id/e"
+            android:layout_below="@id/z"
+            android:text="test"/>
+
+        <!-- type -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:id="@+id/g"
+            android:text="Device Type :"
+            android:layout_below="@+id/e"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:textColor="#ffffff"
+            android:layout_toRightOf="@id/g"
+            android:layout_below="@id/f"
+            android:id="@+id/h"
+            android:text="test"/>
+
+        <!-- id -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:id="@+id/i"
+            android:text="Device ID :"
+            android:layout_below="@+id/g"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:textColor="#ffffff"
+            android:layout_toRightOf="@id/i"
+            android:layout_below="@id/h"
+            android:id="@+id/j"
+            android:text="test"/>
+
+        <!-- Status -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:id="@+id/k"
+            android:text="Status :"
+            android:layout_below="@+id/i"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:textColor="#ffffff"
+            android:layout_toRightOf="@id/k"
+            android:layout_below="@id/j"
+            android:id="@+id/l"
+            android:text="test"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

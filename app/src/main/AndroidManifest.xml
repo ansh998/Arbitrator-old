@@ -49,7 +49,19 @@
             android:name=".Register"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Dark" />
-        <activity android:name=".SyncSetting"></activity>
+        <activity
+            android:name=".SyncSetting"
+            android:label="Syncronisation" />
+
+        <receiver android:name=".MicWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/mic_widget_info" />
+        </receiver>
     </application>
 
 </manifest>
