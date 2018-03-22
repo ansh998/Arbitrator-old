@@ -22,7 +22,8 @@ public class Splash extends AppCompatActivity {
             Manifest.permission.BLUETOOTH_ADMIN,
             Manifest.permission.CAMERA,
             Manifest.permission.READ_CONTACTS,
-            Manifest.permission.SET_ALARM
+            Manifest.permission.SET_ALARM,
+            Manifest.permission.WRITE_SETTINGS
     };
 
 
@@ -48,7 +49,7 @@ public class Splash extends AppCompatActivity {
                 startActivity(i);
                 finish();
             }
-        }, 1000);
+        }, 300);
     }
 
     private boolean haspms(Context context, String pm[]) {

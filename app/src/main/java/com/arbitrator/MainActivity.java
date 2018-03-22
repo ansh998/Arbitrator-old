@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 
 import java.sql.Time;
@@ -37,6 +38,7 @@ import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethod;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -44,8 +46,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -59,13 +63,13 @@ import java.util.regex.Pattern;
 public class MainActivity extends Activity {
 
 
-    TextView tinp;
+    TextView tinp, op;
     ImageButton bspk;
     final int req = 100;
     String t = "";
     String y = "";
     public static String[] parts;
-    Button ok;
+    ImageButton ok;
     ImageView asd;
 
 
@@ -97,6 +101,13 @@ public class MainActivity extends Activity {
         bspk = findViewById(R.id.btnSpeak);
         ok = findViewById(R.id.okbtn);
         asd = findViewById(R.id.menubtn);
+        op = findViewById(R.id.optv);
+
+        op.setMovementMethod(new ScrollingMovementMethod());
+
+        tinp.clearFocus();
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         asd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,12 +124,12 @@ public class MainActivity extends Activity {
         });
 
 
-        tinp.setOnClickListener(new View.OnClickListener() {
+        /*tinp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tinp.setText("");
             }
-        });
+        });*/
 
         tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
