@@ -147,7 +147,10 @@ public class MainActivity extends Activity {
                 y = tinp.getText().toString();
                 tts.speak(y, TextToSpeech.QUEUE_FLUSH, null);
                 pp.parse1(y);
+                op.setText(y);
+                tinp.setText("");
                 y = "";
+
             }
         });
 
@@ -196,6 +199,8 @@ public class MainActivity extends Activity {
 
         pp.parse1(y);
         y = "";
+
+
     }
 
     @Override
@@ -206,7 +211,9 @@ public class MainActivity extends Activity {
             case req: {
                 if (resultCode == RESULT_OK && null != data) {
                     ArrayList<String> rslt = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    tinp.setText(rslt.get(0));
+                    op.setText(rslt.get(0));
+                    tinp.setText("");
+                    tts.speak(op.getText().toString(), TextToSpeech.QUEUE_FLUSH,null);
                     y = rslt.get(0);
                 }
             }
@@ -230,11 +237,16 @@ public class MainActivity extends Activity {
     }
 
     public void onPause() {
+
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
         if (tts != null) {
             tts.stop();
             tts.shutdown();
         }
-        super.onPause();
     }
-
 }

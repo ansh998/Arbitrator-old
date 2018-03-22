@@ -33,9 +33,10 @@
                 android:id="@+id/txtinp1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Hello"
                 android:textColor="#ffffff"
                 android:textSize="24dp"
+                android:hint="Need Assisstance ?"
+                android:textColorHint="#cccccc"
                 android:textStyle="normal" />
 
             <ImageButton
@@ -66,7 +67,7 @@
         android:gravity="center"
         android:maxLines="100"
         android:scrollbars="vertical"
-        android:text="@string/changelog"
+        android:text="Welcome To Arbitrator!"
         android:textAlignment="center"
         android:textColor="#cccccc"
         android:textSize="20dp" />

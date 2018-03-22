@@ -10,7 +10,7 @@
     <string name="reg">No account yet? Create one</string>
 
 
-    <string name="changelog">\[version- \'alpha-1.17\'\] \n -added normal login \n -improved stability \n -added app widget \n -added support of middleware server
+    <string name="changelog">\[version- \'alpha-1.17\'\] \n -added normal login \n -improved stability \n -added app widget \n -added support of middleware server \n -corrected tts \n -rearranged Main Activity Layout \n -Added output Box \n -added Sync tab layout
         \n \n \[version- \'alpha-1.16\'\] \n -improved system stability \n -fixed bugs
         \n \n \[version- \'alpha-1.15\'\] \n -removed register page\n -set link to divert to registration site\n -added Google Sign In Method\n -added functionality of Sign out button
         \n \n \[version- \'alpha-1.14\'\] \n -changed menu button icon\n -added register page

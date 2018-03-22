@@ -94,10 +94,10 @@ public class Parser {
                 set.bt("open");
             } else if (parts[1].equalsIgnoreCase("torch") || parts[1].equalsIgnoreCase("flashlight")) {
                 set.flash("open");
-            } else if (parts.length == 2) {
+            } /*else if (parts.length == 2) {
                 t = parts[1];
                 ao.startApp(ao.appNameList.indexOf(t.toLowerCase()));
-            } else if (parts[1].equalsIgnoreCase("airplane")) {
+            }*/ else if (parts[1].equalsIgnoreCase("airplane")) {
                 //s
             } else {
                 int hits[] = new int[ao.appNameList.size()];
