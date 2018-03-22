@@ -33,10 +33,10 @@
                 android:id="@+id/txtinp1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#ffffff"
-                android:textSize="24dp"
                 android:hint="Need Assisstance ?"
-                android:textColorHint="#cccccc"
+                android:textColor="#ffffff"
+                android:textColorHint="@color/monsoon"
+                android:textSize="24dp"
                 android:textStyle="normal" />
 
             <ImageButton
@@ -54,8 +54,8 @@
     </android.support.design.widget.TextInputLayout>
 
     <TextView
-        android:layout_width="match_parent"
         android:id="@+id/optv"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/txtinp"
         android:layout_below="@+id/menubtn"

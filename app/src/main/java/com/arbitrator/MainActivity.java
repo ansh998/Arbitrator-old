@@ -213,7 +213,7 @@ public class MainActivity extends Activity {
                     ArrayList<String> rslt = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     op.setText(rslt.get(0));
                     tinp.setText("");
-                    tts.speak(op.getText().toString(), TextToSpeech.QUEUE_FLUSH,null);
+                    tts.speak(op.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
                     y = rslt.get(0);
                 }
             }

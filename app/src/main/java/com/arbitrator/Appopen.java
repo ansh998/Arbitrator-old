@@ -1,5 +1,6 @@
 package com.arbitrator;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,12 +13,16 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Appopen {
+
 
     public ArrayList<String> appNameList = new ArrayList<>();
     public ArrayList<String> appPackageList = new ArrayList<>();
 
+
     private final Context context;
+
 
     public Appopen(Context context) {
         this(context, PreferenceManager.getDefaultSharedPreferences(context));
@@ -28,23 +33,22 @@ public class Appopen {
     }
 
     public void startApp() {
+
         PackageManager pm = context.getPackageManager();
+
         Intent i = new Intent(Intent.ACTION_MAIN, null);
         i.addCategory(Intent.CATEGORY_LAUNCHER);
-        List<ResolveInfo> packages = pm.queryIntentActivities(i, 0);
 
+        List<ResolveInfo> packages = pm.queryIntentActivities(i, 0);
         for (ResolveInfo ri : packages) {
             try {
                 String pn = ri.activityInfo.packageName;
                 String an = (String) pm.getApplicationLabel(pm.getApplicationInfo(pn, PackageManager.GET_META_DATA));
-
                 boolean s = false;
-
                 for (int j = 0; j < appNameList.size(); j++) {
                     if (pn.equals(appPackageList.get(j)))
                         s = true;
                 }
-
                 if (!s) {
                     appNameList.add(an.toLowerCase());
                     appPackageList.add(pn);
@@ -68,6 +72,5 @@ public class Appopen {
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         c.startActivity(i);
     }
-
 
 }

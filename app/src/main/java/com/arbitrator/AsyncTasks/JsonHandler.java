@@ -1,11 +1,16 @@
-package com.arbitrator;
+package com.arbitrator.AsyncTasks;
+
 
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.arbitrator.Helper;
+import com.arbitrator.HttpHandler;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 
 public class JsonHandler extends AsyncTask<Helper, Void, JSONObject> {
 
@@ -46,10 +51,8 @@ public class JsonHandler extends AsyncTask<Helper, Void, JSONObject> {
                 JSONObject obj = new JSONObject();
                 for (int i = 0; i < arr.length; i++)
                     obj.put(arr[i][0], arr[i][1]);
-                //return obj;
                 HttpHandler service = new HttpHandler();
                 String jsonStr = service.makeServiceCallpost(url, obj);
-
                 if (jsonStr != null) {
                     try {
                         JSONArray jsonArr = new JSONArray(jsonStr);
@@ -64,14 +67,12 @@ public class JsonHandler extends AsyncTask<Helper, Void, JSONObject> {
                 Log.e(TAG, "Json parsing error: " + e.getMessage());
             }
         }
-
         return jsonObj;
     }
 
     @Override
     protected void onPostExecute(JSONObject aVoid) {
         super.onPostExecute(aVoid);
-        //return aVoid;
     }
 
 }

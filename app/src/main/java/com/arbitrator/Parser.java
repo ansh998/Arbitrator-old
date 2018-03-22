@@ -65,11 +65,11 @@ public class Parser {
                             if (parts.length > t + 1) {
                                 String da = "" + d.getHours();
                                 int n = Integer.parseInt(da);
-                                if (parts[t + 1].equalsIgnoreCase("pm") && n < 13) {
+                                if ((parts[t + 1].equalsIgnoreCase("pm")|| parts[t+1].equalsIgnoreCase("p.m") || parts[t+1].equalsIgnoreCase("p.m.") )&& n < 13) {
                                     n += 12;
                                     if (n > 24)
                                         n -= 24;
-                                } else if (parts[t + 1].equalsIgnoreCase("am") && n > 11) {
+                                } else if ((parts[t + 1].equalsIgnoreCase("am")|| parts[t+1].equalsIgnoreCase("a.m") || parts[t+1].equalsIgnoreCase("a.m.") ) && n > 11) {
                                     n -= 12;
                                 }
                                 da = n + ":" + d.getMinutes();

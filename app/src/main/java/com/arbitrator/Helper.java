@@ -3,9 +3,9 @@ package com.arbitrator;
 public class Helper {
 
 
-    String url;
-    int c;
-    String arr[][];
+    public String url;
+    public int c;
+    public String arr[][];
 
 
     Helper(String url, int c, String arr[][]) {

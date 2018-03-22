@@ -39,7 +39,6 @@ public class SyncSetting extends AppCompatActivity {
         l = (TextView) findViewById(R.id.l);
 
 
-
         if (!check) {
             c.setEnabled(false);
             d.setEnabled(false);
@@ -53,12 +52,12 @@ public class SyncSetting extends AppCompatActivity {
             l.setEnabled(false);
         }
 
-        List<String> cat=new ArrayList<String>();
+        List<String> cat = new ArrayList<String>();
         cat.add("phone");
         cat.add("lauda");
         cat.add("lassan");
 
-        ArrayAdapter<String> da =new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,cat);
+        ArrayAdapter<String> da = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cat);
 
         da.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -68,7 +67,7 @@ public class SyncSetting extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                Toast.makeText(getApplicationContext(),parent.getItemAtPosition(position).toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
 
             }
 
@@ -77,7 +76,6 @@ public class SyncSetting extends AppCompatActivity {
 
             }
         });
-
 
 
     }
