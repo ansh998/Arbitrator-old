@@ -16,6 +16,7 @@ import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.provider.ContactsContract;
+import android.provider.Settings;
 import android.service.autofill.RegexValidator;
 import android.speech.RecognizerIntent;
 import android.os.Bundle;
@@ -54,10 +55,14 @@ import android.widget.ViewSwitcher;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
 
 public class MainActivity extends Activity {
@@ -72,6 +77,10 @@ public class MainActivity extends Activity {
     ImageButton ok;
     ImageView asd;
 
+    FirebaseAuth mAuth;
+    String u;
+    String idd, dev_id;
+
 
     private Set set = null;
     private Appopen ao = null;
@@ -84,6 +93,11 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        idd = "1";
+        dev_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        u = getResources().getString(R.string.url);
+        mAuth = FirebaseAuth.getInstance();
 
         set = new Set(getApplicationContext());
         ao = new Appopen(getApplicationContext());
@@ -167,10 +181,31 @@ public class MainActivity extends Activity {
                         break;
 
                     case R.id.menu_btn_lgout:
-                        FirebaseAuth.getInstance().signOut();
-                        Intent li = new Intent(getApplicationContext(), Login.class);
-                        startActivity(li);
-                        finish();
+                        FirebaseUser account = mAuth.getCurrentUser();
+                        if (account != null) {
+                            FirebaseAuth.getInstance().signOut();
+                            Intent li = new Intent(getApplicationContext(), Login.class);
+                            startActivity(li);
+                            finish();
+                        } else {
+                            try {
+                                JSONObject jo = null;
+                                String[][] arr = new String[][]{
+                                        {"id", idd},
+                                        {"device_id", dev_id}
+                                };
+                                Helper pa = new Helper(u + "Logout", 2, arr);
+                                JsonHandler jh = new JsonHandler();
+                                jo = jh.execute(pa).get();
+                                if (jo.getString("success").equalsIgnoreCase("Successfully Logged Out")) {
+                                    Intent li = new Intent(getApplicationContext(), Login.class);
+                                    startActivity(li);
+                                    finish();
+                                }
+                            } catch (Exception e) {
+                                Log.i("logout", e.getMessage());
+                            }
+                        }
                         break;
 
                     case R.id.menu_btn_sync:

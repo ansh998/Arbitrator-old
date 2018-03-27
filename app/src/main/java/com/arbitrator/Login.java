@@ -3,6 +3,7 @@ package com.arbitrator;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -41,7 +42,7 @@ public class Login extends AppCompatActivity {
     String password = "password";
     SignInButton sib;
     String arr[][];
-    String u,dev_id;
+    String u, dev_id, dev_name;
 
 
     private FirebaseAuth mAuth;
@@ -66,9 +67,11 @@ public class Login extends AppCompatActivity {
 
         sib.setColorScheme(SignInButton.COLOR_LIGHT);
 
-        dev_id= Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        dev_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
 
-        u = getResources().getString(R.string.url1);
+        dev_name = Build.MODEL;
+
+        u = getResources().getString(R.string.url);
 
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -81,8 +84,7 @@ public class Login extends AppCompatActivity {
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bi = new Intent(getApplicationContext(), Register.class);
-                startActivity(bi);
+                regis();
             }
         });
 
@@ -105,29 +107,57 @@ public class Login extends AppCompatActivity {
 
     private void check() {
         try {
+
             JSONObject jo = null;
+
             arr = new String[][]{
                     {"email", em.getText().toString()},
                     {"password", pwd.getText().toString()},
-                    {"device_id",dev_id}
+                    {"device_id", dev_id}
             };
-            Helper pa = new Helper(u + "login", 2, arr);
-            JsonHandler jh = new JsonHandler();
-            try {
-                jo = jh.execute(pa).get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
+
+            jo = Json(u, "login", 2, arr);
+
             if (jo.has("error")) {
-                Toast.makeText(getApplicationContext(), "nay", Toast.LENGTH_SHORT).show();
+                if (jo.getString("error").equalsIgnoreCase("email not found")) {
+                    em.setError("Email not Found");
+                } else if (jo.getString("error").equalsIgnoreCase("passwords not matched")) {
+                    pwd.setError("Incorrect Password");
+                } else if (jo.getString("error").equalsIgnoreCase("device not registered")) {
+                    JSONObject Jt;
+                    String Ta[][] = new String[][]{
+                            {"type", "android"},
+                            {"email", em.getText().toString()},
+                            {"device_id", dev_id},
+                            {"device_name", dev_name + " - " + dev_id.substring(4, 9)}
+                    };
+                    Jt = Json(u, "userdevices", 2, Ta);
+                    if (Jt.isNull("error")) {
+                        Toast.makeText(getApplicationContext(),"Ho Gaya",Toast.LENGTH_LONG).show();
+                    }
+                    else
+                        Toast.makeText(getApplicationContext(),"Nahi Hua",Toast.LENGTH_LONG).show();
+                }
             } else {
                 gotomain();
             }
         } catch (Exception e) {
             Log.d("nrml check", e.getMessage());
         }
+    }
+
+    public JSONObject Json(String url, String func, int w, String ar[][]) {
+        Helper pa = new Helper(url + func, w, ar);
+        JsonHandler jh = new JsonHandler();
+        JSONObject jq = null;
+        try {
+            jq = jh.execute(pa).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return jq;
     }
 
     private void Gsin() {
@@ -242,6 +272,11 @@ public class Login extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void regis() {
+        Intent bi = new Intent(getApplicationContext(), Register.class);
+        startActivity(bi);
     }
 
 }
