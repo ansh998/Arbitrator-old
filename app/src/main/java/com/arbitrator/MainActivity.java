@@ -66,20 +66,18 @@ public class MainActivity extends Activity {
     TextView tinp, op;
     ImageButton bspk;
     final int req = 100;
-    String t = "";
+    static String t = "";
     String y = "";
     public static String[] parts;
     ImageButton ok;
     ImageView asd;
 
 
-    public TextToSpeech tts;
-
-
     private Set set = null;
     private Appopen ao = null;
     private Systemser ss = null;
     private Parser pp = null;
+    private Speaker tts = null;
 
 
     @Override
@@ -87,10 +85,11 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        set = new Set(this);
-        ao = new Appopen(this);
-        ss = new Systemser(this);
-        pp = new Parser(this);
+        set = new Set(getApplicationContext());
+        ao = new Appopen(getApplicationContext());
+        ss = new Systemser(getApplicationContext());
+        pp = new Parser(getApplicationContext());
+        tts = new Speaker(getApplicationContext());
 
         pp.setter(set, ao, ss);
 
@@ -131,23 +130,18 @@ public class MainActivity extends Activity {
             }
         });*/
 
-        tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status != TextToSpeech.ERROR) {
-                    tts.setLanguage(Locale.getDefault());
-                }
-            }
-        });
+        //tts.Sp_Activate();
 
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //ao.startApp();
                 y = tinp.getText().toString();
-                tts.speak(y, TextToSpeech.QUEUE_FLUSH, null);
+                //tts.speak(y, TextToSpeech.QUEUE_FLUSH, null);
                 pp.parse1(y);
-                op.setText(y);
+
+                op.setText(t);
+                //tts.Speech(t);
                 tinp.setText("");
                 y = "";
 
@@ -211,9 +205,8 @@ public class MainActivity extends Activity {
             case req: {
                 if (resultCode == RESULT_OK && null != data) {
                     ArrayList<String> rslt = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    op.setText(rslt.get(0));
+                    op.setText(t);
                     tinp.setText("");
-                    tts.speak(op.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
                     y = rslt.get(0);
                 }
             }
@@ -244,9 +237,6 @@ public class MainActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (tts != null) {
-            tts.stop();
-            tts.shutdown();
-        }
+        tts.Sp_Kill();
     }
 }

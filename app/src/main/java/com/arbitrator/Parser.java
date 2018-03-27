@@ -3,6 +3,7 @@ package com.arbitrator;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.speech.tts.TextToSpeech;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -117,6 +118,12 @@ public class Parser {
                         in = i;
                     }
                 }
+                if (in!=-1) {
+                    t = "opening " + ao.appNameList.get(in);
+                }else {
+                    t="Requested app is not installed !";
+                }
+                MainActivity.t=t;
                 ao.startApp(in);
             }
         }

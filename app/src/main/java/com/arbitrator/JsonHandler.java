@@ -1,4 +1,4 @@
-package com.arbitrator.AsyncTasks;
+package com.arbitrator;
 
 
 import android.os.AsyncTask;

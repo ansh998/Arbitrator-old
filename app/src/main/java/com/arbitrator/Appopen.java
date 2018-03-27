@@ -23,6 +23,8 @@ public class Appopen {
 
     private final Context context;
 
+    private Speaker tts = null;
+
 
     public Appopen(Context context) {
         this(context, PreferenceManager.getDefaultSharedPreferences(context));
@@ -30,6 +32,7 @@ public class Appopen {
 
     public Appopen(Context context, SharedPreferences sp) {
         this.context = context;
+        //tts = new Speaker(context);
     }
 
     public void startApp() {
@@ -60,7 +63,9 @@ public class Appopen {
     }
 
     public void startApp(int f) {
+        tts = new Speaker(context);
         if (f != -1) {
+            tts.Speech("opening " + appNameList.get(f));
             activityStarter(context, appPackageList.get(f));
         } else {
             Toast.makeText(context, "App not Installed !", Toast.LENGTH_SHORT).show();

@@ -3,6 +3,7 @@ package com.arbitrator;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +13,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.arbitrator.AsyncTasks.JsonHandler;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -41,7 +41,7 @@ public class Login extends AppCompatActivity {
     String password = "password";
     SignInButton sib;
     String arr[][];
-    String u;
+    String u,dev_id;
 
 
     private FirebaseAuth mAuth;
@@ -66,7 +66,9 @@ public class Login extends AppCompatActivity {
 
         sib.setColorScheme(SignInButton.COLOR_LIGHT);
 
-        u = getResources().getString(R.string.url2);
+        dev_id= Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+
+        u = getResources().getString(R.string.url1);
 
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +106,11 @@ public class Login extends AppCompatActivity {
     private void check() {
         try {
             JSONObject jo = null;
-            arr = new String[][]{{"email", em.getText().toString()}, {"password", pwd.getText().toString()}};
+            arr = new String[][]{
+                    {"email", em.getText().toString()},
+                    {"password", pwd.getText().toString()},
+                    {"device_id",dev_id}
+            };
             Helper pa = new Helper(u + "login", 2, arr);
             JsonHandler jh = new JsonHandler();
             try {
