@@ -76,6 +76,7 @@ public class MainActivity extends Activity {
     public static String[] parts;
     ImageButton ok;
     ImageView asd;
+    static int in = 0;
 
     FirebaseAuth mAuth;
     String u;
@@ -86,7 +87,9 @@ public class MainActivity extends Activity {
     private Appopen ao = null;
     private Systemser ss = null;
     private Parser pp = null;
-    private Speaker tts = null;
+
+
+    public static TextToSpeech tt;
 
 
     @Override
@@ -96,14 +99,13 @@ public class MainActivity extends Activity {
 
         idd = "1";
         dev_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        u = getResources().getString(R.string.url);
+        u = getResources().getString(R.string.url2);
         mAuth = FirebaseAuth.getInstance();
 
         set = new Set(getApplicationContext());
         ao = new Appopen(getApplicationContext());
         ss = new Systemser(getApplicationContext());
         pp = new Parser(getApplicationContext());
-        tts = new Speaker(getApplicationContext());
 
         pp.setter(set, ao, ss);
 
@@ -144,21 +146,27 @@ public class MainActivity extends Activity {
             }
         });*/
 
-        //tts.Sp_Activate();
+
+        tt = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR) {
+                    tt.setLanguage(Locale.getDefault());
+                }
+            }
+        });
 
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //ao.startApp();
                 y = tinp.getText().toString();
-                //tts.speak(y, TextToSpeech.QUEUE_FLUSH, null);
+                tt.speak(y, TextToSpeech.QUEUE_FLUSH, null);
                 pp.parse1(y);
 
                 op.setText(t);
-                //tts.Speech(t);
                 tinp.setText("");
                 y = "";
-
             }
         });
 
@@ -272,6 +280,9 @@ public class MainActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        tts.Sp_Kill();
+        if (tt != null) {
+            tt.stop();
+            tt.shutdown();
+        }
     }
 }

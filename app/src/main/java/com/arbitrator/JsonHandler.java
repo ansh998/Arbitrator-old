@@ -66,6 +66,19 @@ public class JsonHandler extends AsyncTask<Helper, Void, JSONObject> {
             } catch (final JSONException e) {
                 Log.e(TAG, "Json parsing error: " + e.getMessage());
             }
+        } else if (c == 3) {
+            String jsonStr = hh.makeServiceCalldelete(url);
+
+            if (jsonStr != null) {
+                try {
+                    JSONArray jsonArr = new JSONArray(jsonStr);
+                    jsonObj = (JSONObject) (jsonArr.get(0));
+                } catch (final JSONException e) {
+                    Log.e(TAG, "Json parsing error: " + e.getMessage());
+                }
+            } else {
+                Log.e(TAG, "Couldn't get json from Server.");
+            }
         }
         return jsonObj;
     }

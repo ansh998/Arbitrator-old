@@ -30,6 +30,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 
@@ -43,6 +44,8 @@ public class Login extends AppCompatActivity {
     SignInButton sib;
     String arr[][];
     String u, dev_id, dev_name;
+    public static String det[] = new String[5];
+    public static int goog = -1;
 
 
     private FirebaseAuth mAuth;
@@ -129,14 +132,14 @@ public class Login extends AppCompatActivity {
                             {"type", "android"},
                             {"email", em.getText().toString()},
                             {"device_id", dev_id},
-                            {"device_name", dev_name + " - " + dev_id.substring(4, 9)}
+                            {"device_name", dev_name + "-" + dev_id.substring(4, 9)}
                     };
                     Jt = Json(u, "userdevices", 2, Ta);
                     if (Jt.isNull("error")) {
-                        Toast.makeText(getApplicationContext(),"Ho Gaya",Toast.LENGTH_LONG).show();
-                    }
-                    else
-                        Toast.makeText(getApplicationContext(),"Nahi Hua",Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(), "Ho Gaya", Toast.LENGTH_LONG).show();
+                        gotomain();
+                    } else
+                        Toast.makeText(getApplicationContext(), "Nahi Hua", Toast.LENGTH_LONG).show();
                 }
             } else {
                 gotomain();
@@ -182,10 +185,10 @@ public class Login extends AppCompatActivity {
     public void start(FirebaseUser a) {
         if (a != null) {
             //sendmail(a);
-/*
+
             try {
                 JSONObject jo = null;
-                Helper pa = new Helper(u + "emailcheck/"+a.getEmail(), 1, arr);
+                Helper pa = new Helper(u + "emailcheck/" + a.getEmail(), 1, arr);
                 JsonHandler jh = new JsonHandler();
                 try {
                     jo = jh.execute(pa).get();
@@ -196,21 +199,27 @@ public class Login extends AppCompatActivity {
                 }
                 if (jo.isNull("error")) {
                     Toast.makeText(getApplicationContext(), "Unregistered Email Entered", Toast.LENGTH_SHORT).show();
+                    GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+                    det[0] = acct.getDisplayName();
+                    det[1] = acct.getGivenName();
+                    det[2] = acct.getFamilyName();
+                    det[3] = acct.getEmail();
+                    det[4] = acct.getId();
+                    goog = 99;
                     FirebaseAuth.getInstance().signOut();
                     Intent i = new Intent(getApplicationContext(), Register.class);
                     startActivity(i);
                 } else {
-*/
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(i);
-            signIn();
-            finish();
-/*
+                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(i);
+                    signIn();
+                    finish();
+
                 }
             } catch (Exception e) {
                 Log.d("google", e.getMessage());
             }
-*/
+
         }
     }
 

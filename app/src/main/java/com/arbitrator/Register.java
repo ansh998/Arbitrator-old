@@ -7,9 +7,16 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,11 +24,19 @@ import java.util.Date;
 
 public class Register extends AppCompatActivity {
 
-    TextView dob;
+    EditText a, b, c, d, e, f, k;
     Button reg;
+    RadioButton g, h;
+    ImageButton l;
 
 
-    String date;
+    String un, fn, em, pwd, cpwd, dob, gen;
+
+    String date, u;
+
+    int otpf = -1;
+
+    Boolean otpc = false;
 
 
     SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
@@ -32,15 +47,89 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        u = getResources().getString(R.string.url);
+
         //Date myDate;
 
-        dob = (TextView) findViewById(R.id.input_dob);
+        a = (EditText) findViewById(R.id.input_username);
+        b = (EditText) findViewById(R.id.input_fullname);
+        c = (EditText) findViewById(R.id.input_email);
+        d = (EditText) findViewById(R.id.input_password);
+        e = (EditText) findViewById(R.id.input_cnfrmpassword);
+        f = (EditText) findViewById(R.id.input_dob);
+        g = (RadioButton) findViewById(R.id.input_male);
+        h = (RadioButton) findViewById(R.id.input_female);
+        k = (EditText) findViewById(R.id.input_otp);
+        l = (ImageButton) findViewById(R.id.otp_btn);
         reg = (Button) findViewById(R.id.btn_register);
 
-        dob.addTextChangedListener(new TextWatcher() {
+        if (Login.goog == 99) {
+            b.setText(Login.det[1] + " " + Login.det[2]);
+            c.setText(Login.det[3]);
+        }
+
+        a.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                a.setError(null);
+            }
+        });
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                b.setError(null);
+            }
+        });
+        c.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                c.setError(null);
+            }
+        });
+        d.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                d.setError(null);
+            }
+        });
+        e.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                e.setError(null);
+            }
+        });
+        f.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                f.setError(null);
+            }
+        });
+
+        l.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    if (otpf == 1) {
+                        JSONObject jo = null;
+                        String arr[][] = new String[][]{
+                                {"email", em},
+                                {"otp", k.getText().toString()}
+                        };
+                        Helper pa = new Helper(u + "emailverify", 2, arr);
+                        JsonHandler jh = new JsonHandler();
+                        jo = jh.execute(pa).get();
+                        if (jo.isNull("error"))
+                            otpc=true;
+                    }
+                } catch (Exception e) {
+                    Log.e("otp", e.getMessage());
+                }
+            }
+        });
+
+        f.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -50,31 +139,173 @@ public class Register extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
 
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), Login.class);
-                startActivity(i);
-                finish();
+                if (verify_details()) {
+                    if (Login.goog == 99) {
+                        if (process())
+                            fwd();
+                    } else {
+                        if (otp())
+                            if (process())
+                                fwd();
+                    }
+                }
             }
         });
     }
 
     private void get_date() {
-        date = dob.getText().toString();
+        date = f.getText().toString();
 
         try {
             Date myDate = df.parse(date);
             String my = myDate.getDate() + "/" + (myDate.getMonth() + 1) + "/" + (1900 + myDate.getYear());
             Log.i("qwe", my);
         } catch (ParseException e) {
-            dob.setError("Invalid Date");
+            f.setError("Invalid Date");
             Log.e("hgfdakj", e.getMessage());
         }
+    }
+
+    private Boolean verify_details() {
+        un = a.getText().toString();
+        fn = b.getText().toString();
+        em = c.getText().toString();
+        pwd = d.getText().toString();
+        cpwd = e.getText().toString();
+        dob = f.getText().toString();
+
+        if (g.isChecked())
+            gen = "Male";
+        else if (h.isChecked())
+            gen = "Female";
+        else {
+            Toast.makeText(getApplicationContext(), "Please Select a Gender!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        if (un.length() != 0) {
+            try {
+                JSONObject jo = null;
+                String arr[][] = null;
+                Helper pa = new Helper(u + "usernamecheck/" + un, 1, arr);
+                JsonHandler jh = new JsonHandler();
+                jo = jh.execute(pa).get();
+                if (!jo.isNull("error")) {
+                    a.setError("Username Already Registered");
+                    return false;
+                }
+            } catch (Exception e) {
+                Log.e("uncheck", e.getMessage());
+            }
+        } else {
+            a.setError("This Field cannot be left Blank");
+            return false;
+        }
+
+        if (fn.length() == 0) {
+            b.setError("This Field cannot be left Blank");
+            return false;
+        }
+
+        if (em.length() != 0) {
+            try {
+                JSONObject jo = null;
+                String arr[][] = null;
+                Helper pa = new Helper(u + "emailcheck/" + em, 1, arr);
+                JsonHandler jh = new JsonHandler();
+                jo = jh.execute(pa).get();
+                if (!jo.isNull("error")) {
+                    c.setError("Email is Already Registered");
+                    return false;
+                }
+            } catch (Exception e) {
+                Log.e("emcheck", e.getMessage());
+            }
+        } else {
+            c.setError("This Field cannot be left Blank");
+            return false;
+        }
+
+        if (pwd.length() == 0) {
+            d.setError("This Field cannot be left Blank");
+            return false;
+        }
+
+        if (cpwd.length() == 0) {
+            e.setError("This Field cannot be left Blank");
+            return false;
+        }
+
+        if (dob.length() == 0) {
+            f.setError("This Field cannot be left Blank");
+            return false;
+        }
+
+        if (!pwd.equals(cpwd)) {
+            e.setError("Password and Confirm Password are not same");
+            return false;
+        }
+
+        if (pwd.length() < 6) {
+            d.setError("Password cannot be of less than 6 characters");
+            return false;
+        }
+        return true;
+    }
+
+    private Boolean process() {
+        try {
+            JSONObject jo = null;
+            String arr[][] = new String[][]{
+                    {"username", un},
+                    {"fullname", fn},
+                    {"password", pwd},
+                    {"dob", dob},
+                    {"email", em},
+                    {"gender", gen}
+            };
+            Helper pa = new Helper(u + "Register", 2, arr);
+            JsonHandler jh = new JsonHandler();
+            jo = jh.execute(pa).get();
+            if (jo.isNull("error"))
+                return true;
+            else
+                return false;
+        } catch (Exception e) {
+            Log.e("RegProcess", e.getMessage());
+            return false;
+        }
+    }
+
+    private void fwd() {
+        Intent i = new Intent(getApplicationContext(), Login.class);
+        startActivity(i);
+        finish();
+    }
+
+    private boolean otp() {
+        try {
+            JSONObject jo = null;
+            String arr[][] = null;
+            Helper pa = new Helper(u + "emailverify/" + em, 1, arr);
+            JsonHandler jh = new JsonHandler();
+            jo = jh.execute(pa).get();
+            if (jo.isNull("error")) {
+                otpf = 1;
+
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            Log.e("Regotp", e.getMessage());
+        }
+        return false;
     }
 
 }

@@ -1,6 +1,7 @@
 package com.arbitrator;
 
 import android.Manifest;
+import android.app.AlarmManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -42,14 +43,16 @@ public class Systemser {
             }
             call(number);
         }
-        /*else {
+        /*
+        else {
             String NAME="";
             ContentResolver cr = getContentResolver();
             Cursor cursor= cr.query(ContactsContract.Contacts.CONTENT_URI,null,"DISPLAY_NAME = "+NAME+"'",null,null);
             if (cursor.moveToFirst()){
                 //String
             }
-        }*/
+        }
+        */
     }
 
     private void call(String s) {
