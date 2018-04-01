@@ -1,7 +1,9 @@
 package com.arbitrator;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
@@ -11,6 +13,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +36,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 
 public class Login extends AppCompatActivity {
@@ -39,9 +44,8 @@ public class Login extends AppCompatActivity {
 
     Button login, c;
     TextView em, pwd, reg;
-    String email = "anushkkrastogi@gmail.com";
-    String password = "password";
     SignInButton sib;
+    CheckBox re;
     String arr[][];
     String u, dev_id, dev_name;
     public static String det[] = new String[5];
@@ -55,6 +59,13 @@ public class Login extends AppCompatActivity {
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
 
+    String rem;
+    SharedPreferences sp;
+    SharedPreferences.Editor spe;
+
+    String user;
+    SharedPreferences spu;
+    SharedPreferences.Editor spue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +78,7 @@ public class Login extends AppCompatActivity {
         pwd = (TextView) findViewById(R.id.input_password);
         reg = (TextView) findViewById(R.id.link_signup);
         sib = (SignInButton) findViewById(R.id.gsio);
+        re = (CheckBox) findViewById(R.id.rem_me);
 
         sib.setColorScheme(SignInButton.COLOR_LIGHT);
 
@@ -75,7 +87,19 @@ public class Login extends AppCompatActivity {
         dev_name = Build.MODEL;
 
         u = getResources().getString(R.string.url);
+        rem = getResources().getString(R.string.rem);
+        user = getResources().getString(R.string.user);
 
+        sp = getSharedPreferences(rem, getApplicationContext().MODE_PRIVATE);
+        spe = sp.edit();
+
+        spu = getSharedPreferences(user, getApplicationContext().MODE_PRIVATE);
+        spue = spu.edit();
+
+        if (Integer.parseInt(spu.getString("id", "-1")) > -1) {
+            getval();
+            gotomain();
+        }
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +130,7 @@ public class Login extends AppCompatActivity {
                 Gsin();
             }
         });
+
     }
 
     private void check() {
@@ -139,9 +164,17 @@ public class Login extends AppCompatActivity {
                         //Toast.makeText(getApplicationContext(), "Ho Gaya", Toast.LENGTH_LONG).show();
                         gotomain();
                     } else
-                        Toast.makeText(getApplicationContext(), "Nahi Hua", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Device already registered!", Toast.LENGTH_LONG).show();
                 }
             } else {
+                spue.putString("id", jo.getString("id"));
+                spue.putString("un", jo.getString("username"));
+                spue.putString("fn", jo.getString("fullname"));
+                spue.putString("dob", jo.getString("dob"));
+                spue.putString("em", jo.getString("email"));
+                spue.putString("gen", jo.getString("gender"));
+                spue.putString("sync", jo.getString("sync"));
+                spue.commit();
                 gotomain();
             }
         } catch (Exception e) {
@@ -286,6 +319,22 @@ public class Login extends AppCompatActivity {
     public void regis() {
         Intent bi = new Intent(getApplicationContext(), Register.class);
         startActivity(bi);
+    }
+
+    private void getval() {
+        try {
+            JSONObject jo = null;
+            String arr[][] = null;
+            Helper pa = new Helper(u + "synctoggle/" + spu.getString("id", "-1"), 1, arr);
+            JsonHandler jh = new JsonHandler();
+            jo = jh.execute(pa).get();
+            if (jo.isNull("error")) {
+                spue.putString("sync", jo.getString("success"));
+                spue.commit();
+            }
+        } catch (Exception e) {
+            Log.e("stogget", e.getMessage());
+        }
     }
 
 }

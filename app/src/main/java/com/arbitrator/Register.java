@@ -18,16 +18,19 @@ import android.widget.Toast;
 
 import org.json.JSONObject;
 
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 public class Register extends AppCompatActivity {
 
     EditText a, b, c, d, e, f, k;
     Button reg;
     RadioButton g, h;
-    ImageButton l;
 
 
     String un, fn, em, pwd, cpwd, dob, gen;
@@ -36,10 +39,14 @@ public class Register extends AppCompatActivity {
 
     int otpf = -1;
 
-    Boolean otpc = false;
+    public static Boolean otpc = false;
+
+    public static Time st = null;
+    public static Date dt = null;
+    public static int hr, min;
 
 
-    SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
 
     @Override
@@ -60,7 +67,7 @@ public class Register extends AppCompatActivity {
         g = (RadioButton) findViewById(R.id.input_male);
         h = (RadioButton) findViewById(R.id.input_female);
         k = (EditText) findViewById(R.id.input_otp);
-        l = (ImageButton) findViewById(R.id.otp_btn);
+        //l = (ImageButton) findViewById(R.id.otp_btn);
         reg = (Button) findViewById(R.id.btn_register);
 
         if (Login.goog == 99) {
@@ -105,27 +112,6 @@ public class Register extends AppCompatActivity {
             }
         });
 
-        l.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    if (otpf == 1) {
-                        JSONObject jo = null;
-                        String arr[][] = new String[][]{
-                                {"email", em},
-                                {"otp", k.getText().toString()}
-                        };
-                        Helper pa = new Helper(u + "emailverify", 2, arr);
-                        JsonHandler jh = new JsonHandler();
-                        jo = jh.execute(pa).get();
-                        if (jo.isNull("error"))
-                            otpc=true;
-                    }
-                } catch (Exception e) {
-                    Log.e("otp", e.getMessage());
-                }
-            }
-        });
 
         f.addTextChangedListener(new TextWatcher() {
             @Override
@@ -195,7 +181,7 @@ public class Register extends AppCompatActivity {
                 String arr[][] = null;
                 Helper pa = new Helper(u + "usernamecheck/" + un, 1, arr);
                 JsonHandler jh = new JsonHandler();
-                jo = jh.execute(pa).get();
+                jo = jh.execute(pa).get(2, TimeUnit.SECONDS);
                 if (!jo.isNull("error")) {
                     a.setError("Username Already Registered");
                     return false;
@@ -219,7 +205,7 @@ public class Register extends AppCompatActivity {
                 String arr[][] = null;
                 Helper pa = new Helper(u + "emailcheck/" + em, 1, arr);
                 JsonHandler jh = new JsonHandler();
-                jo = jh.execute(pa).get();
+                jo = jh.execute(pa).get(2, TimeUnit.SECONDS);
                 if (!jo.isNull("error")) {
                     c.setError("Email is Already Registered");
                     return false;
@@ -283,7 +269,7 @@ public class Register extends AppCompatActivity {
         }
     }
 
-    private void fwd() {
+    public void fwd() {
         Intent i = new Intent(getApplicationContext(), Login.class);
         startActivity(i);
         finish();
@@ -298,14 +284,24 @@ public class Register extends AppCompatActivity {
             jo = jh.execute(pa).get();
             if (jo.isNull("error")) {
                 otpf = 1;
-
+                Intent qw = new Intent(getApplicationContext(), Otp.class);
+                startActivity(qw);
+                Otp.phr = Calendar.getInstance().getTime().getHours();
+                Otp.pmi = Calendar.getInstance().getTime().getMinutes();
+                Otp.cpwd = cpwd;
+                Otp.dob = dob;
+                Otp.em = em;
+                Otp.fn = fn;
+                Otp.gen = gen;
+                Otp.pwd = pwd;
+                Otp.un = un;
+                finish();
             } else {
                 return false;
             }
         } catch (Exception e) {
-            Log.e("Regotp", e.getMessage());
+            e.printStackTrace();
         }
         return false;
     }
-
 }

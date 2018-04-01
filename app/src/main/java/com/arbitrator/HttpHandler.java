@@ -102,6 +102,37 @@ public class HttpHandler {
         return response;
     }
 
+    public String makeServiceCallput(String reqUrl, JSONObject urlparams) {
+        String response = null;
+        try {
+            URL url = new URL(reqUrl);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("PUT");
+            conn.addRequestProperty("User-Agent", "Mozilla/5.0");
+            conn.addRequestProperty("Accept-Language", "en-US,en;q=0.5");
+            conn.addRequestProperty("Accept", "application/json");
+            conn.addRequestProperty("Content-Type", "application/json");
+
+            DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
+            wr.writeBytes(urlparams.toString());
+            wr.flush();
+            wr.close();
+
+            // read the response
+            InputStream in = new BufferedInputStream(conn.getInputStream());
+            response = convertStreamToString(in);
+        } catch (MalformedURLException e) {
+            Log.e(TAG, "MalformedURLException: " + e.getMessage());
+        } catch (ProtocolException e) {
+            Log.e(TAG, "ProtocolException: " + e.getMessage());
+        } catch (IOException e) {
+            Log.e(TAG, "IOException: " + e.getMessage());
+        } catch (Exception e) {
+            Log.e(TAG, "Exception: " + e.getMessage());
+        }
+        return response;
+    }
+
     private String convertStreamToString(InputStream is) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();

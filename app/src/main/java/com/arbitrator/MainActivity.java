@@ -7,6 +7,7 @@ import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
@@ -63,6 +64,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 public class MainActivity extends Activity {
@@ -91,6 +93,10 @@ public class MainActivity extends Activity {
 
     public static TextToSpeech tt;
 
+    String user;
+    SharedPreferences spu;
+    SharedPreferences.Editor spue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,8 +105,9 @@ public class MainActivity extends Activity {
 
         idd = "1";
         dev_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        u = getResources().getString(R.string.url2);
+        u = getResources().getString(R.string.url);
         mAuth = FirebaseAuth.getInstance();
+        user = getResources().getString(R.string.user);
 
         set = new Set(getApplicationContext());
         ao = new Appopen(getApplicationContext());
@@ -110,6 +117,9 @@ public class MainActivity extends Activity {
         pp.setter(set, ao, ss);
 
         ao.startApp();
+
+        spu = getSharedPreferences(user, Context.MODE_PRIVATE);
+        spue = spu.edit();
 
 
         tinp = findViewById(R.id.txtinp1);
@@ -194,6 +204,8 @@ public class MainActivity extends Activity {
                             FirebaseAuth.getInstance().signOut();
                             Intent li = new Intent(getApplicationContext(), Login.class);
                             startActivity(li);
+                            spue.remove("id");
+                            spue.commit();
                             finish();
                         } else {
                             try {
@@ -208,6 +220,8 @@ public class MainActivity extends Activity {
                                 if (jo.getString("success").equalsIgnoreCase("Successfully Logged Out")) {
                                     Intent li = new Intent(getApplicationContext(), Login.class);
                                     startActivity(li);
+                                    spue.remove("id");
+                                    spue.commit();
                                     finish();
                                 }
                             } catch (Exception e) {
@@ -285,4 +299,6 @@ public class MainActivity extends Activity {
             tt.shutdown();
         }
     }
+
+
 }

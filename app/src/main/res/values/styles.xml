@@ -21,6 +21,10 @@
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
 
+        <item name="android:textColor">@color/primary_darker</item>
+        <item name="android:spinnerItemStyle">@color/white</item>
+        <item name="android:spinnerDropDownItemStyle">@color/white</item>
+
         <item name="android:windowBackground">@color/primary</item>
 
         <item name="colorControlNormal">@color/iron</item>

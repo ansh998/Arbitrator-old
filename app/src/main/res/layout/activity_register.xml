@@ -71,37 +71,6 @@
                 android:inputType="textEmailAddress" />
         </android.support.design.widget.TextInputLayout>
 
-        <!-- otp Label -->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <EditText
-                    android:id="@+id/input_otp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="OTP( Skip for Google Sign In )"
-                    android:inputType="text" />
-
-                <ImageButton
-                    android:id="@+id/otp_btn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="10dp"
-                    android:background="@android:color/transparent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_send_white_18dp"/>
-
-            </RelativeLayout>
-        </android.support.design.widget.TextInputLayout>
-
         <!-- Password Label -->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -147,7 +116,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Date of Birth (DD-MM-YYYY)"
+                android:hint="Date of Birth (DD/MM/YYYY)"
                 android:inputType="date" />
         </android.support.design.widget.TextInputLayout>
 

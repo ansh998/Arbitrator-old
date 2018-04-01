@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.arbitrator">
 
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -17,6 +18,7 @@
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
 
     <application
         android:allowBackup="true"
@@ -45,15 +47,16 @@
             android:theme="@style/AppTheme.Dark" />
         <activity
             android:name=".changelog"
-            android:label="Changelog"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Dark" />
         <activity
             android:name=".Register"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Dark" />
         <activity
             android:name=".SyncSetting"
-            android:label="Syncronisation" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <receiver android:name=".MicWidget">
             <intent-filter>
@@ -65,7 +68,8 @@
                 android:resource="@xml/mic_widget_info" />
         </receiver>
 
-        <!--receiver
+        <!--
+        receiver
             android:name=".BootReceiver"
             android:enabled="true"
             android:exported="true"
@@ -74,7 +78,12 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </receiver-->
+        </receiver
+        -->
+        <activity
+            android:name=".Otp"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Dark" />
     </application>
 
 </manifest>

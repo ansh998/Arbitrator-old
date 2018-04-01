@@ -7,6 +7,13 @@
     android:background="@color/primary_dark"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Syncronisation Setting"
+        android:textColor="@color/white"
+        android:textSize="25dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,8 +58,9 @@
 
         <Spinner
             android:id="@+id/d"
-            android:layout_width="90dp"
+            android:layout_width="match_parent"
             android:layout_height="20dp"
+            android:layout_marginRight="20dp"
             android:layout_marginLeft="80dp"
             android:layout_marginTop="13dp"
             android:layout_toRightOf="@+id/c"
@@ -94,9 +102,9 @@
                 android:layout_height="20dp"
                 android:layout_column="2"
                 android:layout_below="@id/z"
+                android:layout_marginLeft="5dp"
                 android:layout_marginTop="13dp"
                 android:layout_toRightOf="@id/e"
-                android:text="test"
                 android:textColor="#ffffff"
                 android:textSize="18dp" />
         </TableRow>
@@ -122,9 +130,9 @@
                 android:layout_height="20dp"
                 android:layout_column="2"
                 android:layout_below="@id/f"
+                android:layout_marginLeft="5dp"
                 android:layout_marginTop="13dp"
                 android:layout_toRightOf="@id/g"
-                android:text="test"
                 android:textColor="#ffffff"
                 android:textSize="18dp" />
         </TableRow>
@@ -150,9 +158,9 @@
                 android:layout_height="20dp"
                 android:layout_column="2"
                 android:layout_below="@id/h"
+                android:layout_marginLeft="5dp"
                 android:layout_marginTop="13dp"
                 android:layout_toRightOf="@id/i"
-                android:text="test"
                 android:textColor="#ffffff"
                 android:textSize="18dp" />
         </TableRow>
@@ -177,9 +185,9 @@
                 android:layout_height="20dp"
                 android:layout_column="2"
                 android:layout_below="@id/j"
+                android:layout_marginLeft="5dp"
                 android:layout_marginTop="13dp"
                 android:layout_toRightOf="@id/k"
-                android:text="test"
                 android:textColor="#ffffff"
                 android:textSize="18dp" />
         </TableRow>

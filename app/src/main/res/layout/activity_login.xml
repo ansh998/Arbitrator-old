@@ -32,8 +32,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:text="saatvik@gmail.com" />
+                android:inputType="textEmailAddress" />
+            <!--android:text="saatvik@gmail.com"-->
+
         </android.support.design.widget.TextInputLayout>
 
         <!-- Password Label -->
@@ -49,10 +50,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
-                android:inputType="textPassword"
-                android:text="pass" />
+                android:inputType="textPassword" />
+            <!--android:text="pass"-->
+
 
         </android.support.design.widget.TextInputLayout>
+
+        <CheckBox
+            android:id="@+id/rem_me"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Remember Me" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_login"
